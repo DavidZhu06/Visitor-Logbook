@@ -1,0 +1,103 @@
+/* Margin is space around element's border (control's space around element's border), while padding is space BETWEEN element's border and element's content (INSIDE element - makes it bigger)
+font-family is group of ofnts that share the same design
+display:flex is layout model (default: row) that allows arrangment of items inside container flexibily and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
+justify-content property controls horizontal alignment (main axis) of flex items 
+align-items property controls vertical alignment (cross axis)
+height property - 100vh means min. height of element should be 100% of viewport height*/
+
+html {
+    font-size: 100%;
+    /* 100% is the default font size, which is equivalent to 16px */
+}
+body {
+    margin:0;
+    font-family: 'Inter', sans-serif;
+   /*Inter is the preferred font, sans-serif is the generic fallback font (if Inter doesn't load)*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:#1bb970;
+}
+
+.container {
+    text-align: center;
+    background-color:rgb(255, 255, 255);
+    width: 55%;
+    height: 55%;
+    /*setting width prevents an element from stretching to fill the entire width of its parent container
+    however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
+    padding: 2rem;
+    /*rem is unit of measurement that is relative the font size of the root element -part of responsive design*/
+    border-radius: 20px;
+    /*rounds the corners*/
+    box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.11);
+    /*adds shadow effects around frame - horizontal offset (right), vertical offset (down), blur radius (shadow strength)*/
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+.logo {
+    width: 150px;
+    margin-bottom: 0.5rem;
+}
+
+.brandname {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #3f51b5;
+    margin-bottom:1rem
+}
+
+.subtext {
+  color: #3f51b5;;
+  font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/*the container*/
+.button-layout {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.button {
+    flex: 0.4;
+    /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal number of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space)*/
+    padding: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    /*removes default underline browsers use to apply <a>*/
+    text-decoration: none;
+    /*transition property allows smooth change of an element's property (e.g. transform) over a specified duration (0.1s) with an easing function (ease)*/
+    transition: transform 0.1s ease;
+}
+
+.sign-in{
+    /*background of the element*/
+    background-color: #4b42c4;
+    /*color of text inside element*/
+    color: rgb(255, 255, 255);
+    border: 1 px solid #929292;
+}
+
+.sign-out {
+    /*background of the element*/
+    background-color: #ebdddd;
+    /*color of text inside element*/
+    color: rgb(0, 0, 0);
+    border: 1 px solid #929292;
+}
+
+/*pressing the button changes its size*/
+.button:active {
+  transform: scale(0.9);
+}
