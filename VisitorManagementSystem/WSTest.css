@@ -1,0 +1,115 @@
+
+  html {
+      font-size: 100%;
+  }
+  body {
+      margin:0;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* Remove background-color from body */
+      padding: 1rem;
+      position: relative;
+      overflow: hidden; /* prevent scrollbars from animation */
+  }
+
+  /* Animated background element */
+  body::before {
+    content: "";
+    position: fixed;  /* fixed to viewport */
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;  /* behind everything */
+    background: linear-gradient(270deg, #1bb970, #4b42c4, #1bb970, #3f51b5);
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  /* Your existing .container and other styles */
+  .container {
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+      width: 90%;
+      max-width: 700px;
+      padding: 2vw;
+      height: 55%;
+      border-radius: 20px;
+      box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.11);
+      overflow-x: hidden;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box; /* fixed syntax */
+  }
+
+  /* The rest of your styles stay the same */
+
+  .logo {
+      width: 20vw;
+      max-width: 150px;
+      height: auto;
+      margin: 1rem auto;
+  }
+
+  .brandname {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: bold;
+      color: #3f51b5;
+      margin-bottom: 1rem;
+  }
+
+  .subtext {
+      color: #3f51b5;
+      font-size: clamp(1rem, 2vw, 4rem);
+      margin-bottom: 1.5rem;
+  }
+
+  .button-layout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 3rem;
+  }
+
+  .button {
+      flex: 1 1 0;
+      padding: 1.5rem;
+      min-width: 120px;
+      max-width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: bold;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.1s ease;
+  }
+
+  .sign-in {
+      background-color: #4b42c4;
+      color: rgb(255, 255, 255);
+      border: 1px solid #929292;
+  }
+
+  .sign-out {
+      background-color: #ebdddd;
+      color: rgb(0, 0, 0);
+      border: 1px solid #929292;
+  }
+
+  .button:active {
+      transform: scale(0.9);
+  }

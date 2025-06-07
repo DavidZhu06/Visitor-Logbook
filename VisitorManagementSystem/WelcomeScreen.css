@@ -1,50 +1,77 @@
 /* Margin is space around element's border (control's space around element's border), while padding is space BETWEEN element's border and element's content (INSIDE element - makes it bigger)
 font-family is group of ofnts that share the same design
 display:flex is layout model (default: row) that allows arrangment of items inside container flexibily and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
-justify-content property controls horizontal alignment (main axis) of flex items 
-align-items property controls vertical alignment (cross axis)
+justify-content property controls alignment of main axis of flex items 
+align-items property controls alignment of the cross axis (perpendicular to main axis)
 height property - 100vh means min. height of element should be 100% of viewport height*/
 
 html {
     font-size: 100%;
     /* 100% is the default font size, which is equivalent to 16px */
 }
+
 body {
     margin:0;
     font-family: 'Inter', sans-serif;
    /*Inter is the preferred font, sans-serif is the generic fallback font (if Inter doesn't load)*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /*turns HTML element into flexbox container*/
+    flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
+    justify-content: center; /*tells flex container to lay child elements vertically*/
+    align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
     height: 100vh;
     background-color:#1bb970;
+    padding: 1rem;
 }
+
+  /* Animated background element */
+  body::before {
+    content: "";
+    position: fixed;  /* fixed to viewport */
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;  /* behind everything */
+    background: linear-gradient(270deg, #a316e4, #4b42c4, #1bb970, #3f51b5);
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
 
 .container {
     text-align: center;
     background-color:rgb(255, 255, 255);
-    width: 55%;
+    width: 90%;
+    max-width: 700px;
+    padding: 2vw; /*vw means viewport width, the number in front is the percentage of the width of the viewport - responsive design*/
     height: 55%;
     /*setting width prevents an element from stretching to fill the entire width of its parent container
     however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
-    padding: 2rem;
-    /*rem is unit of measurement that is relative the font size of the root element -part of responsive design*/
+
     border-radius: 20px;
     /*rounds the corners*/
     box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.11);
     /*adds shadow effects around frame - horizontal offset (right), vertical offset (down), blur radius (shadow strength)*/
     overflow-x: hidden;
     overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
 }
 
 
 .logo {
-    width: 150px;
-    margin-bottom: 0.5rem;
+    width: 20vw; 
+    max-width: 150px;
+    height: auto; /*preserves images aspect ratio (prevent distortion)*/
+    margin: 1rem auto 1rem auto; /*margin of picture: top right bottom left*/
 }
 
 .brandname {
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem); /*(never smaller than, ideally, never larger than)*/
     font-weight: bold;
     color: #3f51b5;
     margin-bottom:1rem
@@ -52,25 +79,29 @@ body {
 
 .subtext {
   color: #3f51b5;;
-  font-size: 1.3rem;
-    margin-bottom: 1rem;
+  font-size: clamp(1rem, 2vw ,4rem);
+  margin-bottom: 1.5rem;
 }
 
 /*the container*/
 .button-layout {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    align-items: center;
+    flex-wrap: nowrap; /*buttons must stay side by side - not super necessary in this case*/
+    gap: 2rem;
 }
 
 .button {
-    flex: 0.4;
-    /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal number of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space)*/
-    padding: 1.8rem;
+    flex:1 1 0;
+    /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal fraction of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space)*/
+    padding: 1.5rem;
+    min-width: 120px;
+    max-width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: bold;
     border-radius: 8px;
     border: none;
@@ -86,7 +117,7 @@ body {
     background-color: #4b42c4;
     /*color of text inside element*/
     color: rgb(255, 255, 255);
-    border: 1 px solid #929292;
+    border: 1px solid #929292;
 }
 
 .sign-out {
@@ -94,10 +125,11 @@ body {
     background-color: #ebdddd;
     /*color of text inside element*/
     color: rgb(0, 0, 0);
-    border: 1 px solid #929292;
+    border: 1px solid #929292;
 }
 
 /*pressing the button changes its size*/
 .button:active {
   transform: scale(0.9);
 }
+
