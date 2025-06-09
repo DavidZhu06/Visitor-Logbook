@@ -18,24 +18,24 @@ body {
     flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
     justify-content: center; /*tells flex container to lay child elements vertically*/
     align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
-    height: 100vh;
+    height: 100vh; /*vh = viewport height   number in front is the percentage of*/
     background-color:#1bb970;
-    padding: 1rem;
+    padding: 1rem; /*equals font size of html element*/
 }
 
   /* Animated background element */
-  body::before {
+  body::before { /*pseudo element - for full-screen BACKGROUND ANIMATION without interfering with rest of page content*/
     content: "";
-    position: fixed;  /* fixed to viewport */
+    position: fixed;  /* fixed to viewport (even for when user scrolls) */
     top: 0; left: 0; right: 0; bottom: 0;
-    z-index: -1;  /* behind everything */
-    background: linear-gradient(270deg, #a316e4, #4b42c4, #1bb970, #3f51b5);
-    background-size: 800% 800%;
-    animation: gradientShift 20s ease infinite;
+    z-index: -1;  /* behind everything else on page*/
+    background: linear-gradient(270deg, #a316e4, #4b42c4, #13da7d, #3f51b5); /*horizontal gradient with four colors - 270deg means gradient goes left to right*/
+    background-size: 800%; /*makes gradient larger than element/screen (more unique parts of background slide across viewport creating smoother transition)*/
+    animation: gradientShift 20s ease infinite; /*calls created animation called gradientShift, runs over 20 seconds, eases smoothly, loops infinitely*/
   }
 
   @keyframes gradientShift {
-    0% {background-position: 0% 50%;}
+    0% /*point in time*/ {background-position: 0% 50%;} /*first number is width (far left of background), second number is height (centered vertically)*/
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
   }
@@ -46,16 +46,15 @@ body {
     width: 90%;
     max-width: 700px;
     padding: 2vw; /*vw means viewport width, the number in front is the percentage of the width of the viewport - responsive design*/
-    height: 55%;
-    /*setting width prevents an element from stretching to fill the entire width of its parent container
+    height: 55%; /*setting width prevents an element from stretching to fill the entire width of its parent container
     however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
 
     border-radius: 20px;
     /*rounds the corners*/
     box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.11);
     /*adds shadow effects around frame - horizontal offset (right), vertical offset (down), blur radius (shadow strength)*/
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,7 +79,7 @@ body {
 .subtext {
   color: #3f51b5;;
   font-size: clamp(1rem, 2vw ,4rem);
-  margin-bottom: 1.5rem;
+  margin-bottom: rem;
 }
 
 /*the container*/
@@ -133,3 +132,10 @@ body {
   transform: scale(0.9);
 }
 
+.divider-line {
+    width: clamp(200px, 75%, 600px); /* More responsive to narrow and wide viewports */
+    height: 2px;
+    background-color: rgba(123, 122, 124, 0.651); /* Subtle neutral tone that adapts better with themes */
+    margin: 1rem auto 1.5rem;
+    border: none;
+}
