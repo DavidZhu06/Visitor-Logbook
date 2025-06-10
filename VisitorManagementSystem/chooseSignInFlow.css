@@ -94,7 +94,7 @@ body::before {
     font-weight: bold;
     background-color: #4b42c4;
     color: white;
-    border: 1px solid #ffffff;
+    border: 1.5px solid #ffffff;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }

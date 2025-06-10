@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visitor Sign-In</title>
-  <link rel="stylesheet" href="VisitorInfo.css" />
+  <title>Contractor Sign-In</title>
+  <link rel="stylesheet" href="ContractorInfo.css" />
 </head>
 <body>
   <div class="flow-container">
     <img src="IDCILogo.webp" alt="Imperial Distributors Canada Inc. Logo" class="logo" />
-    <h1 class="welcome-text">Imperial Distributors</h1>
-    <p class="select-text">Please fill in the required fields</p>
+    <h1 class="welcome-text">Contractor Sign-In</h1>
+    <p class="select-text">Please fill in the below fields.</p>
 
     <form class="visitor-form">
       <div class="form-group">
@@ -24,7 +24,12 @@
       </div>
 
       <div class="form-group full-width">
-        <label for="company">Company / Reason for Visit</label>
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label for="company">Brief Description of Service Provided</label>
         <input type="text" id="company" name="company" required />
       </div>
 
