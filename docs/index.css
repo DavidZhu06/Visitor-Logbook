@@ -18,9 +18,11 @@ body {
     flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
     justify-content: center; /*tells flex container to lay child elements vertically*/
     align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
-    height: 100vh; /*vh = viewport height   number in front is the percentage of*/
+    min-height: 100vh; /*vh = viewport height   number in front is the % of*/
     background-color:#1bb970;
     padding: 1rem; /*equals font size of html element*/
+    box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
+    overflow-x: hidden; /*prevents horizontal scroll on small screens*/
 }
 
   /* Animated background element */
@@ -43,11 +45,11 @@ body {
   .container {
     text-align: center;
     background-color:rgb(255, 255, 255);
-    width: 90%;
+    width: 90%; /*setting width prevents an element from stretching to fill the entire width of its parent container
+    however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
     max-width: 700px;
     padding: 2vw; /*vw means viewport width, the number in front is the percentage of the width of the viewport - responsive design*/
-    height: 55%; /*setting width prevents an element from stretching to fill the entire width of its parent container
-    however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
+    height: auto;
     border-radius: 20px;
     /*rounds the corners*/
     box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.333);
@@ -58,6 +60,7 @@ body {
     flex-direction: column;
     justify-content: center;
     box-sizing: border box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
+    margin-bottom: 2rem;
 }
 
 .logo {
@@ -136,4 +139,8 @@ body {
     background-color: rgba(123, 122, 124, 0.651); /* Subtle neutral tone that adapts better with themes */
     margin: 1rem auto 1.5rem;
     border: none;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
