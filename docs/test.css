@@ -1,6 +1,6 @@
 /* Margin is space around element's border (control's space around element's border), while padding is space BETWEEN element's border and element's content (INSIDE element - makes it bigger)
-font-family is group of ofnts that share the same design
-display:flex is layout model (default: row) that allows arrangment of items inside container flexibily and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
+font-family is group of fonts that share the same design
+display:flex is layout model (default: row) that allows arrangement of items inside container flexibly and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
 justify-content property controls alignment of main axis of flex items 
 align-items property controls alignment of the cross axis (perpendicular to main axis)
 height property - 100vh means min. height of element should be 100% of viewport height*/
@@ -23,6 +23,7 @@ body {
     padding: 1rem; /*equals font size of html element*/
     box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
     overflow-x: hidden; /*prevents horizontal scroll on small screens*/
+    position: relative; /* Ensure positioning context for header */
 }
 
   /* Animated background element */
@@ -59,7 +60,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-sizing: border box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
+    box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
     margin-bottom: 2rem;
 }
 
@@ -80,7 +81,7 @@ body {
 .subtext {
   color: #3f51b5;;
   font-size: clamp(1rem, 2vw ,4rem);
-  margin-bottom: rem;
+  margin-bottom: 1rem;
 }
 
 /*the container*/
@@ -95,10 +96,11 @@ body {
 .button {
     flex:1 1 0;
     /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal fraction of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space)*/
-    padding: 1.5rem;
+    padding: 0.5rem 1rem; /* Adjusted padding to fit icon below text */
     min-width: 120px;
     max-width: 50%;
     display: flex;
+    flex-direction: column; /* Stack text and icon vertically */
     justify-content: center;
     align-items: center;
     font-size: clamp(1rem, 2vw, 1.25rem);
@@ -112,11 +114,11 @@ body {
     transition: transform 0.1s ease;
 }
 
-.sign-in{
+.sign-in {
     /*background of the element*/
-    background-color: #4b42c4;
+    background-color: #6760c5;
     /*color of text inside element*/
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     border: 1px solid #929292;
 }
 
@@ -164,3 +166,4 @@ body {
 .nowrap {
     white-space: nowrap;
 }
+
