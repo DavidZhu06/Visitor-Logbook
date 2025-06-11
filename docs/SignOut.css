@@ -113,3 +113,16 @@ body::before {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* fade out animation */
+body.fade-out {
+    opacity: 0;
+}
+
+/* Date and time box */
+.date-time-box {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}

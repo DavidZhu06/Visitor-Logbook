@@ -103,7 +103,7 @@ body {
     flex-direction: column; /* Stack text and icon vertically */
     justify-content: center;
     align-items: center;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1rem, 2.25vw, 2rem);
     font-weight: bold;
     border-radius: 8px;
     border: none;
@@ -125,10 +125,12 @@ body {
 .sign-in::after {
     content: "";
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 24px; /* Increased size for larger icon */
+    height: 24px; /* Increased size for larger icon */
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>');
-    background-size: contain;
+    background-size: contain; /* Ensure SVG scales to fit */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
     margin-top: 0.5rem; /* Space between text and icon */
 }
 
@@ -143,10 +145,12 @@ body {
 .sign-out::after {
     content: "";
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>');
     background-size: contain;
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
     margin-top: 0.5rem; /* Space between text and icon */
 }
 

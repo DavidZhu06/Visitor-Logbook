@@ -59,33 +59,12 @@ body::before {
 .select-text {
     font-size: 1.2rem;
     color: #666;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0.5rem 0;
+    text-align: center; /* Center-align text */
 }
 
-/* Button styling */
-.flow-button {
-    width: 100%;
-    max-width: 200px;
-    height: 3rem;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background-color: #4b42c4;
-    color: white;
-    border: 1px solid #ffffff;
-    border-radius: 12px;
-    text-align: center;
-    line-height: 3rem;
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.2s ease;
+/* New styles for date-time-box */
+.date-time-box {
+    display: inline; /* Keep inline to avoid extra spacing */
+    font-weight: bold; /* Bold the date */
 }
-
-.flow-button:hover {
-    background-color: #3a30a2;
-}
-
-.flow-button:active {
-    background-color: #2c2185;
-}
-
