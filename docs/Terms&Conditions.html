@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Access Policy</title>
+  <style>
+    body {
+      background-color: #b3a8d7;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+     /* Animated background element */
+    body::before { /*pseudo element - for full-screen BACKGROUND ANIMATION without interfering with rest of page content*/
+        content: "";
+        position: fixed;  /* fixed to viewport (even for when user scrolls) */
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: -1;  /* behind everything else on page*/
+        background: linear-gradient(270deg, #a316e4, #4b42c4, #13da7d, #3f51b5); /*horizontal gradient with four colors - 270deg means gradient goes left to right*/
+        background-size: 800%; /*makes gradient larger than element/screen (more unique parts of background slide across viewport creating smoother transition)*/
+        animation: gradientShift 20s ease infinite; /*calls created animation called gradientShift, runs over 20 seconds, eases smoothly, loops infinitely*/
+    }
+
+    @keyframes gradientShift {
+        0% /*point in time*/ {background-position: 0% 50%;} /*first number is width (far left of background), second number is height (centered vertically)*/
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    } 
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    h2 {
+      color: #6c757d;
+      text-align: center;
+    }
+    p {
+      color: #6c757d;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .signature-container {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    #signatureCanvas {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: crosshair;
+      touch-action: none; /* Prevents default touch behaviors like scrolling */
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: auto;
+    }
+    #clearBtn, #submitBtn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100px;
+    }
+    #clearBtn {
+      background-color: #e9ecef;
+    }
+    #submitBtn {
+      background-color: #007bff;
+      color: white;
+    }
+    #clearBtn:hover, #submitBtn:hover {
+      opacity: 0.9;
+    }
+    #termsContent {
+      height: 300px; /* Increased from 300px to make the box bigger */
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Imperial Distributors Canada Inc.</h2>
+    <div id="termsContent">
+      <h3>Visitor Access Policy</h3>
+      <p>PLEASE READ IN ITS ENTIRETY BEFORE SIGNING. </p>
+      <p><strong>I. NON-DISCLOSURE POLICY:  </strong>I acknowledge that the information received or otherwise obtained, directly or indirectly, while at Imperial Distributors Canada Inc. (Company) is confidential and that the nature of the business is such that the following conditions are reasonable. Therefore: <br>I agree that I will not, at any time, either during the term of this agreement or thereafter, divulge to any person, firm or corporation any information received with regard to the personal/ private information or other affairs of the Company. All such information shall be kept confidential and shall not in any manner be revealed to anyone, except as expressly authorized for the performance of the operational duties or otherwise required by law. Any information causing irreparable harm to the Company, will be subject to immediate injunctive action by the Company, including any remedies available in law.<br> I recognize that I may be given access to confidential information belonging to IDCI through my relationship with the Company or as a result of my access to Company’s premises. The Company’s private operations and trade secrets consist of information and materials that are valuable and not generally known by Company’s competitors. <br>In consideration of being admitted to Company’s facilities, I will hold the strictest confidence any trade secrets or confidential information, whether oral or written, that is disclosed to me. I will not remove any books, records or documents or copies thereof, in any format (i.e. electronic or otherwise) from the premises without Company’s written permission. <strong>I will not photograph or otherwise record any information which I may have access to during my visit. </strong><br>IDCI shall be entitled to and has the right to obtain an injunction to ensure compliance with this agreement. A failure to comply with these restrictive agreements constitutes a violation of business conduct and maybe cause for legal action, termination of further business affiliation, and access to Company’s premises.</p>
+      <p><strong>II. SECURITY, SAFETY & GMP POLICY: </strong><br>I acknowledge that I will:<br></p>
+        <ol>
+            <li> <p>Be escorted by an IDCI employee while inside the building.</p></li>
+            <li><p>Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</p></li>
+            <li><p>Sign-in and sign-out of restricted areas where required.</p></li>
+            <li><p>Maintain all exterior and interior doors in a closed position.</p></li>
+            <li><p>Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.</p></li>
+            <li><p>Not bring any food or beverage or smoke inside the warehouse.</p></li>
+            <li><p>Not handle any product if permitted inside the warehouse unless with prior permission.</p></li> 
+        </ol>
+      <p>Please review these Terms and Conditions ("Terms") carefully before signing below.</p>
+    </div>
+    <div class="signature-container">
+      <p>Please e-sign this agreement:</p>
+      <canvas id="signatureCanvas" width="400" height="200"></canvas>
+    </div>
+    <div class="button-container">
+      <button id="clearBtn">Clear</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('signatureCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round'; // Smooths line connections
+    ctx.strokeStyle = '#000';
+
+    // Get canvas offset for accurate coordinates
+    function getCanvasCoordinates(event) {
+      const rect = canvas.getBoundingClientRect();
+      if (event.type.startsWith('touch')) {
+        return {
+          x: event.touches[0].clientX - rect.left,
+          y: event.touches[0].clientY - rect.top
+        };
+      }
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+      };
+    }
+
+    // Start drawing
+    function startDrawing(e) {
+      e.preventDefault();
+      isDrawing = true;
+      const coords = getCanvasCoordinates(e);
+      lastX = coords.x;
+      lastY = coords.y;
+      ctx.beginPath();
+    }
+
+    // Stop drawing
+    function stopDrawing() {
+      isDrawing = false;
+      ctx.beginPath();
+    }
+
+    // Draw on canvas
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getCanvasCoordinates(e);
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    // Mouse events
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    // Touch events
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+    canvas.addEventListener('touchcancel', stopDrawing);
+
+    // Clear canvas
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+  // Submit signature
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      window.location.href = './SignInEndScreen.html'; // Replace with the actual target page URL
+    });
+  </script>
+</body>
+</html>
