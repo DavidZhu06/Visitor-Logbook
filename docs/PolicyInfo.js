@@ -7,6 +7,7 @@ let isDrawing = false; //means user is not drawing at the start, set to true whe
 let lastX = 0;
 let lastY = 0;
 let signatureData = []; // Array to store signature data if needed
+let currentLanguage = 'en'; // Default language
 
 //specify drawing style
 ctx.lineWidth = 2;
@@ -106,3 +107,4 @@ document.getElementById('submitBtn').addEventListener('click', () => {
 // Resize canvas on load and window resize
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
+

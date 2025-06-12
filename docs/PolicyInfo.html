@@ -40,6 +40,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
+      position:relative; /* Added for positioning language button */
     }
     h2 {
       color: #6c757d;
@@ -97,6 +98,24 @@
       border: 1px solid #ccc;
       padding: 10px;
     }
+
+    #languageToggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 8px 12px;
+      border: 1px solid #4b42c4;
+      border-radius: 5px;
+      background-color: white;
+      color: #4b42c4;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #languageToggle:hover {
+      background-color: #4b42c4;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -108,13 +127,13 @@
       <p><strong>I. NON-DISCLOSURE POLICY:  </strong>I acknowledge that the information received or otherwise obtained, directly or indirectly, while at Imperial Distributors Canada Inc. (Company) is confidential and that the nature of the business is such that the following conditions are reasonable. Therefore: <br>I agree that I will not, at any time, either during the term of this agreement or thereafter, divulge to any person, firm or corporation any information received with regard to the personal/ private information or other affairs of the Company. All such information shall be kept confidential and shall not in any manner be revealed to anyone, except as expressly authorized for the performance of the operational duties or otherwise required by law. Any information causing irreparable harm to the Company, will be subject to immediate injunctive action by the Company, including any remedies available in law.<br> I recognize that I may be given access to confidential information belonging to IDCI through my relationship with the Company or as a result of my access to Company’s premises. The Company’s private operations and trade secrets consist of information and materials that are valuable and not generally known by Company’s competitors. <br>In consideration of being admitted to Company’s facilities, I will hold the strictest confidence any trade secrets or confidential information, whether oral or written, that is disclosed to me. I will not remove any books, records or documents or copies thereof, in any format (i.e. electronic or otherwise) from the premises without Company’s written permission. <strong>I will not photograph or otherwise record any information which I may have access to during my visit. </strong><br>IDCI shall be entitled to and has the right to obtain an injunction to ensure compliance with this agreement. A failure to comply with these restrictive agreements constitutes a violation of business conduct and maybe cause for legal action, termination of further business affiliation, and access to Company’s premises.</p>
       <p><strong>II. SECURITY, SAFETY & GMP POLICY: </strong><br>I acknowledge that I will:<br></p>
         <ol>
-            <li> <p>Be escorted by an IDCI employee while inside the building.</p></li>
-            <li><p>Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</p></li>
-            <li><p>Sign-in and sign-out of restricted areas where required.</p></li>
-            <li><p>Maintain all exterior and interior doors in a closed position.</p></li>
-            <li><p>Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.</p></li>
-            <li><p>Not bring any food or beverage or smoke inside the warehouse.</p></li>
-            <li><p>Not handle any product if permitted inside the warehouse unless with prior permission.</p></li> 
+            <li><p id="escortRule">Be escorted by an IDCI employee while inside the building.</p></li>
+            <li><p id="accessCardRule">Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</p></li>
+            <li><p id="signInRule">Sign-in and sign-out of restricted areas where required.</p></li>
+            <li><p id="doorsRule">Maintain all exterior and interior doors in a closed position.</p></li>
+            <li><p id="evacuationRule">Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.</p></li>
+            <li><p id="foodRule">Not bring any food or beverage or smoke inside the warehouse.</p></li>
+            <li><p id="productRule">Not handle any product if permitted inside the warehouse unless with prior permission.</p></li> 
         </ol>
       <p>Please review these policies carefully before signing below.</p>
     </div>
@@ -126,6 +145,7 @@
       <button id="clearBtn">Clear</button>
       <button id="submitBtn">Next</button>
     </div>
+    <button id="languageToggle">EN/FR</button> <!-- Language toggle button -->
   </div>
   <script src="PolicyInfo.js"></script>
 </body>
