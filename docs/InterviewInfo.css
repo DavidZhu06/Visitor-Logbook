@@ -5,7 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -24,6 +24,7 @@ body {
     overflow: hidden;
     padding: 1rem;
     box-sizing: border-box;
+    margin: 1rem; /* Added margin to prevent content from touching viewport edges */
 }
 
 /* Logo at the top */

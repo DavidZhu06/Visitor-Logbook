@@ -10,8 +10,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
+      padding: 2vw; /*responsive padding so that it never completely dissappears no matter how small I make the viewport */
     }
 
      /* Animated background element */
@@ -41,6 +42,7 @@
       display: flex;
       flex-direction: column;
       position:relative; /* Added for positioning language button */
+      margin-top: 2vh; /* Added margin to ensure top visibility */
     }
     h2 {
       color: #6c757d;

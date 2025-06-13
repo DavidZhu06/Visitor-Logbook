@@ -3,8 +3,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /*body will always take full viewport height */
     margin: 0;
+    padding: 2vw; /*responsive padding so that it never completely dissappears no matter how small I make the viewport */
 }
 
 /* Animated background element */
@@ -33,6 +34,7 @@ body::before {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    margin-top: 2vh; /* Added margin to ensure top visibility */
 }
 
 h2 {
