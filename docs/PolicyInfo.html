@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visitor Access Policy</title>
+  <title data-key="title">Visitor Access Policy</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -122,32 +122,32 @@
 </head>
 <body>
   <div class="container">
-    <h2>Imperial Distributors Canada Inc.</h2>
+    <h2 data-key="companyName">Imperial Distributors Canada Inc.</h2>
     <div id="termsContent">
-      <h3>Visitor Access Policy</h3>
-      <p>PLEASE READ IN ITS ENTIRETY BEFORE SIGNING. </p>
-      <p><strong>I. NON-DISCLOSURE POLICY:  </strong>I acknowledge that the information received or otherwise obtained, directly or indirectly, while at Imperial Distributors Canada Inc. (Company) is confidential and that the nature of the business is such that the following conditions are reasonable. Therefore: <br>I agree that I will not, at any time, either during the term of this agreement or thereafter, divulge to any person, firm or corporation any information received with regard to the personal/ private information or other affairs of the Company. All such information shall be kept confidential and shall not in any manner be revealed to anyone, except as expressly authorized for the performance of the operational duties or otherwise required by law. Any information causing irreparable harm to the Company, will be subject to immediate injunctive action by the Company, including any remedies available in law.<br> I recognize that I may be given access to confidential information belonging to IDCI through my relationship with the Company or as a result of my access to Company’s premises. The Company’s private operations and trade secrets consist of information and materials that are valuable and not generally known by Company’s competitors. <br>In consideration of being admitted to Company’s facilities, I will hold the strictest confidence any trade secrets or confidential information, whether oral or written, that is disclosed to me. I will not remove any books, records or documents or copies thereof, in any format (i.e. electronic or otherwise) from the premises without Company’s written permission. <strong>I will not photograph or otherwise record any information which I may have access to during my visit. </strong><br>IDCI shall be entitled to and has the right to obtain an injunction to ensure compliance with this agreement. A failure to comply with these restrictive agreements constitutes a violation of business conduct and maybe cause for legal action, termination of further business affiliation, and access to Company’s premises.</p>
-      <p><strong>II. SECURITY, SAFETY & GMP POLICY: </strong><br>I acknowledge that I will:<br></p>
-        <ol>
-            <li><p id="escortRule">Be escorted by an IDCI employee while inside the building.</p></li>
-            <li><p id="accessCardRule">Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</p></li>
-            <li><p id="signInRule">Sign-in and sign-out of restricted areas where required.</p></li>
-            <li><p id="doorsRule">Maintain all exterior and interior doors in a closed position.</p></li>
-            <li><p id="evacuationRule">Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.</p></li>
-            <li><p id="foodRule">Not bring any food or beverage or smoke inside the warehouse.</p></li>
-            <li><p id="productRule">Not handle any product if permitted inside the warehouse unless with prior permission.</p></li> 
-        </ol>
-      <p>Please review these policies carefully before signing below.</p>
+      <h3 data-key="policyTitle">Visitor Access Policy</h3>
+      <p data-key="readInstruction">PLEASE READ IN ITS ENTIRETY BEFORE SIGNING.</p>
+      <p><strong data-key="nonDisclosureTitle">I. NON-DISCLOSURE POLICY:</strong> <span data-key="nonDisclosureText">[Non-disclosure policy text]</span></p>
+      <p><strong data-key="securityTitle">II. SECURITY, SAFETY & GMP POLICY:</strong><br><span data-key="securityIntro">I acknowledge that I will:</span></p>
+      <ol>
+        <li><p id="escortRule" data-key="escortRule">Be escorted by an IDCI employee while inside the building.</p></li>
+        <li><p id="accessCardRule" data-key="accessCardRule">Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</p></li>
+        <li><p id="signInRule" data-key="signInRule">Sign-in and sign-out of restricted areas where required.</p></li>
+        <li><p id="doorsRule" data-key="doorsRule">Maintain all exterior and interior doors in a closed position.</p></li>
+        <li><p id="evacuationRule" data-key="evacuationRule">Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.</p></li>
+        <li><p id="foodRule" data-key="foodRule">Not bring any food or beverage or smoke inside the warehouse.</p></li>
+        <li><p id="productRule" data-key="productRule">Not handle any product if permitted inside the warehouse unless with prior permission.</p></li>
+      </ol>
+      <p data-key="reviewInstruction">Please review these policies carefully before signing below.</p>
     </div>
     <div class="signature-container">
-      <p>Please e-sign below:</p>
+      <p data-key="signInstruction">Please e-sign below:</p>
       <canvas id="signatureCanvas"></canvas>
     </div>
     <div class="button-container">
-      <button id="clearBtn">Clear</button>
-      <button id="submitBtn">Next</button>
+      <button id="clearBtn" data-key="clearBtn">Clear</button>
+      <button id="submitBtn" data-key="submitBtn">Next</button>
     </div>
-    <button id="languageToggle">EN/FR</button> <!-- Language toggle button -->
+    <button id="languageToggle" data-key="languageToggle">Switch to French</button>
   </div>
   <script src="PolicyInfo.js"></script>
 </body>
