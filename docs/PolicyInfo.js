@@ -134,7 +134,7 @@ resizeCanvas();
       signInstruction: "Please e-sign below:",
       clearBtn: "Clear",
       submitBtn: "Next",
-      languageToggle: "EN"
+      languageToggle: "FR"
     },
     fr: {
       title: "Politique d'accès des visiteurs",
@@ -156,7 +156,7 @@ resizeCanvas();
       signInstruction: "Veuillez signer électroniquement ci-dessous :",
       clearBtn: "Effacer",
       submitBtn: "Suivant",
-      languageToggle: "FR"
+      languageToggle: "EN"
     }
   };
 
