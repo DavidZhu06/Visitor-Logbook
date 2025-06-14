@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Information</title>
+  <link rel="stylesheet" href="./ParkingPage.css">
+
+  <style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /*body will always take full viewport height */
+    margin: 0;
+    padding: 2vw; /*responsive padding so that it never completely dissappears no matter how small I make the viewport */
+}
+
+/* Animated background element */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background: linear-gradient(270deg, #a316e4, #4b42c4, #13da7d, #3f51b5);
+    background-size: 800%;
+    animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vh; /* Added margin to ensure top visibility */
+}
+
+h2 {
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #6c757d;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.parking-info {
+    height: 300px; 
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.parking-image-container {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.parking-image {
+    width: 100%;
+    max-width: 500px; /* Limits image size to avoid overflow */
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.next-btn{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100px;
+    background-color: #4b42c4;
+    color: white;
+}
+
+.next-btn:hover {
+    opacity: 0.8;
+}
+
+.next-btn:active{
+    transform: scale(0.9);
+}
+
+#languageToggle {
+  padding: 10px 20px;
+  border: 1px solid #4b42c4;
+  border-radius: 5px;
+  background-color: white;
+  color: #4b42c4;
+  font-size: 16px; /* Match next-btn font size */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100px; /* Match next-btn width */
+  margin-left: auto;
+}
+
+#languageToggle:hover {
+  background-color: #4b42c4;
+  color: white;
+}
+
+#languageToggle:active {
+  transform: scale(0.9); /* Match next-btn active state */
+}
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <h2>Parking Information</h2>
+    <div class="parking-info">
+      <h3>Parking Guidelines</h3>
+      <p>Welcome to the parking information page for Imperial Distributors Canada Inc. This measure is to prevent unauthorized vehicles from occupying spaces reserved for IDCI and Pure employees/visitors. Below are <b>general guidelines for parking</b> at our facility.</p>
+      <p>1. <strong>Designated Areas</strong>: Please park only in the areas marked for IDCI/PURE parking. <strong>Unauthorized vehicles will be towed at the owner’s expense</strong></p>
+      <p>2. <strong>Parking Pass</strong>: Parking passes must be clearly displayed or hung on your rearview mirror at all times while on company property. <strong>Please make sure to get a parking pass upon arrival.</strong></p>
+      <p>3. <strong>Time Limits</strong>: Parking is limited to the duration of your visit. Overnight parking is not permitted without prior approval.</p>
+    </div>
+    <div class="parking-image-container">
+      <img src="ParkingMap.jpg" alt="Acceptable Parking Locations" class="parking-image">
+    </div>
+    <div class="button-container">
+      <button class="next-btn" onclick="window.location.href='./SignInEndScreen.html'">Next</button>
+      <button id="languageToggle" data-key="languageToggle"></button>
+    </div>
+  </div>
+  <script src="./ParkingPage.js"></script>
+</body>
+</html>

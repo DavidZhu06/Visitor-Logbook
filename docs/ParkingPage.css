@@ -78,7 +78,7 @@ p {
     margin-top: auto;
 }
 
-.next-btn {
+.next-btn{
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -93,11 +93,9 @@ p {
     opacity: 0.8;
 }
 
-.next-btn:active {
+.next-btn:active{
     transform: scale(0.9);
 }
 
-.next-btn:active {
-    transform: scale(0.9);
-}
+
 
