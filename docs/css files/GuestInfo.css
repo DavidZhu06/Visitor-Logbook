@@ -31,7 +31,7 @@ body {
 /* Logo at the top */
 .logo {
     width: 20vw;
-    max-width: 150px;
+    max-width: 120px;
     min-width: 80px;
 }
 
@@ -100,7 +100,6 @@ body::before {
 /* Form container */
 .visitor-form {
     width: 100%;
-    padding: 1rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -126,7 +125,7 @@ body::before {
 }
 
 .form-group input {
-    padding: 0.6rem;
+    padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
@@ -135,7 +134,7 @@ body::before {
 
 /* Submit button within form */
 form .flow-button {
-    height: 4rem;
+    height: 3rem;
     border-radius: 12px;
 }
 
