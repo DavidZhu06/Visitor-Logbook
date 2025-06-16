@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contractor Sign-In</title>
-  <link rel="stylesheet" href="css files/ContractorInfo.css" />
+  <link rel="stylesheet" href="./../css files/ContractorInfo.css" /> <!-- ./ means current folder (can leave this out), ../ means go up one folder level from the current folder-->
 </head>
 <body>
   <div class="flow-container">
-    <img src="images/IDCILogo.webp" alt="Imperial Distributors Canada Inc. Logo" class="logo" />
+    <img src="./../images/IDCILogo.webp" alt="Imperial Distributors Canada Inc. Logo" class="logo" />
     <h1 class="welcome-text">Contractor Sign-In</h1>
     <p class="select-text">Please fill in the below fields.</p>
 
-    <form class="visitor-form" action="PolicyInfo.html" method="get">
+    <form class="visitor-form" action="./PolicyInfo.html" method="get">
       <div class="form-group">
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first-name" required />
