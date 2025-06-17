@@ -24,9 +24,18 @@
       </div>
 
       <div class="form-group full-width">
-        <label for="company">Delivery Company</label>
-        <input type="text" id="company" name="company" required />
+        <label for="company">Delivery Company</label> <!--label is an html element that acts as a label for a field, Delivery Company is what users see on the page describing the field, for="company" attribute ties the Delivery Company label to the input field with id="company"-->
+        <select id="company" name="company" onchange="toggleCustomInput()" required>
+          <option value="">-- Please choose --</option>
+          <option value="1">FedEx</option>
+          <option value="2">UPS</option>
+          <option value="3">Purolator</option>
+          <option value="4">Canada Post</option>
+          <option value="5">Other</option>
+        </select>
+        <input type="text" id="custom-company" name="company" placeholder="Enter company name" style="display:none; margin-top: 10px;" /> <!--After I click, other, the number of pixels between the drop down box and the newly appeared 'other' box-->
       </div>
+
 
       <div class="form-group full-width">
         <label for="recipient">Recipient</label>
@@ -36,5 +45,24 @@
       <button type="submit" class="flow-button">Submit</button>
     </form>
   </div>
+
+  <!--The below script is for the dropdown menu for the delivery company-->
+  <script>
+  function toggleCustomInput() {
+    const select = document.getElementById("company-select");
+    const customInput = document.getElementById("custom-company");
+
+    if (select.value === "Other") {
+      customInput.style.display = "block";
+      customInput.required = true;
+      select.name = "company-select"; // Change name to avoid conflict
+    } else {
+      customInput.style.display = "none";
+      customInput.required = false;
+      select.name = "company"; // Use name="company" for submitted value
+    }
+  }
+  
+</script>
 </body>
 </html>
