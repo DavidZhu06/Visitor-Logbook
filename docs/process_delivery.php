@@ -1,60 +1,54 @@
 <?php
-// Set timezone to Pacific Time
-date_default_timezone_set('America/Vancouver');
-
-// Database connection
 $host = "localhost";
 $dbname = "visitorlogbook_db";
 $username = "root";
 $password = "IDCIp@ssDZ2025!";
 
 try {
+    // Create PDO connection
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Handle form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $first_name = $_POST['first-name'];
-        $last_name = $_POST['last-name'];
-        $recipient = $_POST['recipient'];
+        // Get and sanitize form data
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+        $company = filter_input(INPUT_POST, 'company', FILTER_SANITIZE_STRING);
+        $custom_company = filter_input(INPUT_POST, 'custom_company', FILTER_SANITIZE_STRING);
+        $recipient = filter_input(INPUT_POST, 'recipient', FILTER_SANITIZE_STRING);
         $sign_in_time = date('Y-m-d H:i:s');
 
-        // Get the selected value from dropdown
-        $company_value = $_POST['company'];
-
-        // If user selected "Other", take the custom input
-        if ($company_value === "5") {
-            $company = $_POST['custom-company'];
-        } else {
-            $company = companyNameFromValue($company_value);
+        // Validate required fields
+        if (empty($first_name) || empty($last_name) || empty($company) || empty($recipient)) {
+            throw new Exception("All required fields must be filled.");
         }
 
-        // Prepare SQL insert
+        // Determine the company name to store
+        $company_name = $company;
+        if ($company === "Other") {
+            if (empty($custom_company)) {
+                throw new Exception("Please enter a company name for 'Other'.");
+            }
+            $company_name = $custom_company;
+        }
+
+        // Prepare and execute SQL statement
         $stmt = $conn->prepare("INSERT INTO delivery (first_name, last_name, company, recipient, sign_in_time) 
                                 VALUES (:first_name, :last_name, :company, :recipient, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':company', $company);
+        $stmt->bindParam(':company', $company_name);
         $stmt->bindParam(':recipient', $recipient);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
         $stmt->execute();
 
-        // Redirect on success
+        // Redirect to confirmation page
         header("Location: ./html files/SignInEndScreen.html");
         exit();
     }
 } catch (PDOException $e) {
     echo "Database Error: " . $e->getMessage();
-}
-
-// Map dropdown value to company name
-function companyNameFromValue($value) {
-    switch ($value) {
-        case "1": return "FedEx";
-        case "2": return "UPS";
-        case "3": return "Purolator";
-        case "4": return "Canada Post";
-        default: return "Unknown";
-    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>

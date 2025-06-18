@@ -12,28 +12,28 @@
     <h1 class="welcome-text">Delivery Sign-In</h1>
     <p class="select-text">Please fill in the below fields</p>
 
-    <form class="visitor-form" action="./../process_delivery.php" method="post">
+    <form class="visitor-form" action="../process_delivery.php" method="post">
       <div class="form-group">
         <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first-name" required />
+        <input type="text" id="first-name" name="first_name" required />
       </div>
 
       <div class="form-group">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" required />
+        <input type="text" id="last-name" name="last_name" required />
       </div>
 
       <div class="form-group full-width">
         <label for="company">Delivery Company</label> <!--label is an html element that acts as a label for a field, Delivery Company is what users see on the page describing the field, for="company" attribute ties the Delivery Company label to the input field with id="company"-->
         <select id="company" name="company" onchange="toggleCustomInput()" required>
           <option value="">-- Please choose --</option>
-          <option value="1">FedEx</option>
-          <option value="2">UPS</option>
-          <option value="3">Purolator</option>
-          <option value="4">Canada Post</option>
-          <option value="5">Other</option>
+          <option value="FedEx">FedEx</option>
+          <option value="UPS">UPS</option>
+          <option value="Purolator">Purolator</option>
+          <option value="Canada Post">Canada Post</option>
+          <option value="Other">Other</option>
         </select>
-        <input type="text" id="custom-company" name="company" placeholder="Enter company name" style="display:none; margin-top: 10px;" /> <!--After I click, other, the number of pixels between the drop down box and the newly appeared 'other' box-->
+        <input type="text" id="custom-company" name="custom_company" placeholder="Enter company name" style="display:none; margin-top: 10px;" /> <!--After I click, other, the number of pixels between the drop down box and the newly appeared 'other' box-->
       </div>
 
 
@@ -52,14 +52,14 @@
     const select = document.getElementById("company");
     const customInput = document.getElementById("custom-company");
 
-    if (select.value === "5") { // Value "5" corresponds to "Other"
+    if (select.value === "Other") {
       customInput.style.display = "block";
       customInput.required = true;
-      select.name = "company-select"; // Prevent duplicate name conflict
-    } else {
+    } 
+    else {
       customInput.style.display = "none";
       customInput.required = false;
-      select.name = "company";
+      customInput.value = ""; // Clear the input if not needed
     }
   }
 </script>

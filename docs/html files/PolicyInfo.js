@@ -97,12 +97,19 @@ canvas.addEventListener('touchcancel', stopDrawing);
 document.getElementById('clearBtn').addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   signatureData = []; // Clear stored points
+  document.getElementById('signature').value = '';
 });
 
-// Next Button (submit signature and redirect to next page)
+// Update signature input before form submission
 document.getElementById('submitBtn').addEventListener('click', () => {
-  window.location.href = "./ParkingPage.html"; 
+  if (signatureData.length > 0) {
+    const signature = canvas.toDataURL('image/png');
+    document.getElementById('signature').value = signature;
+  } else {
+    alert('Please provide a signature before submitting.');
+  }
 });
+
 
 // Resize canvas on load and window resize
 window.addEventListener('resize', resizeCanvas);

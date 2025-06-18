@@ -121,6 +121,8 @@
   </style>
 </head>
 <body>
+  <form id="signatureForm" action="../process_policy.php" method="post">
+  <input type="hidden" id="signature" name="signature" value="">
   <div class="container">
     <h2 data-key="companyName">Imperial Distributors Canada Inc.</h2>
     <div id="termsContent">
@@ -144,11 +146,12 @@
       <canvas id="signatureCanvas"></canvas>
     </div>
     <div class="button-container">
-      <button id="clearBtn" data-key="clearBtn">Clear</button>
-      <button id="submitBtn" data-key="submitBtn">Next</button>
+      <button type="button" id="clearBtn" data-key="clearBtn">Clear</button>
+      <button type="submit" id="submitBtn" data-key="submitBtn">Next</button>
     </div>
     <button id="languageToggle" data-key="languageToggle"></button>
   </div>
+  </form>
   <script src="PolicyInfo.js"></script>
 </body>
 </html>
