@@ -12,7 +12,7 @@
     <h1 class="welcome-text">Delivery Sign-In</h1>
     <p class="select-text">Please fill in the below fields</p>
 
-    <form class="visitor-form" action="SignInEndScreen.html" method="get">
+    <form class="visitor-form" action="./../process_delivery.php" method="post">
       <div class="form-group">
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first-name" required />
@@ -47,22 +47,22 @@
   </div>
 
   <!--The below script is for the dropdown menu for the delivery company-->
-  <script>
+<script>
   function toggleCustomInput() {
-    const select = document.getElementById("company-select");
+    const select = document.getElementById("company");
     const customInput = document.getElementById("custom-company");
 
-    if (select.value === "Other") {
+    if (select.value === "5") { // Value "5" corresponds to "Other"
       customInput.style.display = "block";
       customInput.required = true;
-      select.name = "company-select"; // Change name to avoid conflict
+      select.name = "company-select"; // Prevent duplicate name conflict
     } else {
       customInput.style.display = "none";
       customInput.required = false;
-      select.name = "company"; // Use name="company" for submitted value
+      select.name = "company";
     }
   }
-  
 </script>
+
 </body>
 </html>
