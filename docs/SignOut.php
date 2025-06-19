@@ -16,7 +16,7 @@ try {
     }
 
     // Tables to search
-    $tables = ['contractors', 'delivery', 'guests', 'interview'];
+    $tables = ['contractors', 'deliveries', 'guests', 'interviews'];
 
     $found = false;
 

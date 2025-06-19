@@ -1,4 +1,7 @@
 <?php
+
+session_start(); // <-- Needed to use $_SESSION
+
 // Database connection
 $host = "localhost";
 $dbname = "visitorlogbook_db";
@@ -20,7 +23,7 @@ try {
         $sign_in_time = date('Y-m-d H:i:s');
     
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO interview (first_name, last_name, IDCI_Contact, email_contact, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :sign_in_time)");
+        $stmt = $conn->prepare("INSERT INTO interviews (first_name, last_name, IDCI_Contact, email_contact, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':IDCI_Contact', $IDCI_Contact);
@@ -29,6 +32,10 @@ try {
 
         // Execute the statement
         $stmt->execute();
+
+        // Save the inserted ID and type to session
+        $_SESSION['guest_id'] = $conn->lastInsertId();
+        $_SESSION['sign_in_type'] = 'interview';
 
         // Redirect to PolicyInfo.html on success
         header("Location: ./html files/PolicyInfo.html");

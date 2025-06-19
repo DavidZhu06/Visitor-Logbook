@@ -1,4 +1,8 @@
 <?php
+
+session_start(); // <-- Needed to use $_SESSION
+
+
 $host = "localhost";
 $dbname = "visitorlogbook_db";
 $username = "root";
@@ -24,7 +28,12 @@ try {
         $stmt->bindParam(':reason', $reason);
         $stmt->bindParam(':email_contact', $email_contact);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
+
         $stmt->execute();
+
+        // Save the inserted ID and type to session
+        $_SESSION['guest_id'] = $conn->lastInsertId();
+        $_SESSION['sign_in_type'] = 'guest';
 
         header("Location: ./html files/PolicyInfo.html");
         exit();

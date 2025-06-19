@@ -1,4 +1,7 @@
 <?php
+
+session_start(); // <-- Needed to use $_SESSION
+
 // Database connection
 $host = "localhost";
 $dbname = "visitorlogbook_db";
@@ -31,6 +34,9 @@ try {
 
         // Execute the statement
         $stmt->execute();
+
+        $_SESSION['guest_id'] = $conn->lastInsertId();
+        $_SESSION['sign_in_type'] = 'contractor';
 
         // Redirect to PolicyInfo.html on success
         header("Location: ./html files/PolicyInfo.html");

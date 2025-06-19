@@ -1,4 +1,7 @@
 <?php
+
+session_start(); // <-- Needed to use $_SESSION
+
 $host = "localhost";
 $dbname = "visitorlogbook_db";
 $username = "root";
@@ -33,14 +36,19 @@ try {
         }
 
         // Prepare and execute SQL statement
-        $stmt = $conn->prepare("INSERT INTO delivery (first_name, last_name, company, recipient, sign_in_time) 
+        $stmt = $conn->prepare("INSERT INTO deliveries (first_name, last_name, company, recipient, sign_in_time) 
                                 VALUES (:first_name, :last_name, :company, :recipient, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':company', $company_name);
         $stmt->bindParam(':recipient', $recipient);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
+
         $stmt->execute();
+
+        // Save the inserted ID and type to session
+        $_SESSION['guest_id'] = $conn->lastInsertId();
+        $_SESSION['sign_in_type'] = 'guest';
 
         // Redirect to confirmation page
         header("Location: ./html files/SignInEndScreen.html");

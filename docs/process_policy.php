@@ -1,4 +1,6 @@
 <?php
+session_start(); // Access session variables
+
 // Database connection settings
 $host = 'localhost';
 $dbname = 'visitorlogbook_db';
@@ -17,27 +19,48 @@ try {
         // Remove data URL prefix if present
         $signature = preg_replace('/^data:image\/(png|jpeg);base64,/', '', $signature);
 
-        // Save as PNG file
+        // Save as PNG file (for download/debug/logging - Optional)
         $file_path = 'signatures/signature_' . time() . '.png';
         if (!file_exists('signatures')) {
             mkdir('signatures', 0755, true);
         }
         file_put_contents($file_path, base64_decode($signature));
         
-        // Prepare SQL statement
-        $stmt = $pdo->prepare("INSERT INTO signatures (signature_data, time_of_signature) VALUES (:signature, NOW())");
-        
-        // Execute with signature data
-        $stmt->execute([
-            ':signature' => $signature
-        ]);
+        // Lookup table based on sign-in type
+        $table_map = [
+            'interview' => 'interviews',
+            'contractor' => 'contractors',
+            'delivery' => 'deliveries',
+            'guest' => 'guests'
+        ];
 
-        // Redirect to parking page
-        header('Location: ./html files/ParkingPage.html');
-        exit;
+        $sign_in_type = $_SESSION['sign_in_type'] ?? null;
+        $guest_id = $_SESSION['guest_id'] ?? null;
+
+        if ($sign_in_type && $guest_id && isset($table_map[$sign_in_type])) {
+            $table = $table_map[$sign_in_type];
+
+            // IMPORTANT: Column `signature_data` must exist in each table
+            $stmt = $pdo->prepare("UPDATE $table SET signature_data = :signature WHERE id = :id");
+        
+            // Execute with signature data
+            $stmt->execute([
+                ':signature' => $signature,
+                ':id' => $guest_id
+            ]);
+
+            // Redirect to parking page
+            header('Location: ./html files/ParkingPage.html');
+            exit;
+        } else {
+            // Redirect back to policy info if no signature is provided 
+            header('Location: ./html files/PolicyInfo.html');
+            exit;
+        }
     } else {
-        //Redirect back to policy info if not signature is provided 
+        // Redirect back to policy info if no signature is provided 
         header('Location: ./html files/PolicyInfo.html');
+        exit;
     }
 } catch (PDOException $e) {
     // Handle database errors
