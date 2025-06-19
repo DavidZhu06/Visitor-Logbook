@@ -74,10 +74,17 @@ body {
     box-sizing: border-box;
 }
 
-/* Submit button */
+/* Button group to align buttons side by side */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Submit and Back button styling */
 .flow-button {
     margin-top: 1rem;
-    width: 100%;
+    flex: 1; /* Makes buttons take equal space */
     height: 3rem;
     font-size: 1.3rem;
     font-weight: bold;
@@ -87,6 +94,9 @@ body {
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    text-align: center;
+    line-height: 3rem; /* Vertically center text in Back button */
+    text-decoration: none; /* Remove underline for Back button link */
 }
 
 .flow-button:hover {
@@ -95,6 +105,19 @@ body {
 
 .flow-button:active {
     background-color: #2c2185;
+}
+
+/* Specific styling for Back button if needed */
+.back-button {
+    background-color: #10ad2a; /* Different color to distinguish from Sign Out */
+}
+
+.back-button:hover {
+    background-color: #0c883b;
+}
+
+.back-button:active {
+    background-color: #05660d;
 }
 
 /* Animated background */

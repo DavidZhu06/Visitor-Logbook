@@ -6,7 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    overflow: hidden; /* prevent scrollbars on very short screens */
+    overflow: hidden;
 }
 
 /* Animated background */
@@ -59,7 +59,7 @@ body::before {
 }
 
 .select-text {
-    font-size: clamp(1.1rem, 1vw, 1.4rem);
+    font-size: clamp(1.1rem, 1.6vw, 2rem);
     color: #555;
     margin-bottom: 1.25rem;
     text-align: center;
