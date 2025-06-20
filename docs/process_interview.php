@@ -20,14 +20,16 @@ try {
         $last_name = $_POST['last_name'];
         $IDCI_Contact = $_POST['IDCI_Contact'];
         $email_contact = $_POST['email_contact'];
+        $passnumber = $_POST['passnumber'];
         $sign_in_time = date('Y-m-d H:i:s');
     
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO interviews (first_name, last_name, IDCI_Contact, email_contact, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :sign_in_time)");
+        $stmt = $conn->prepare("INSERT INTO interviews (first_name, last_name, IDCI_Contact, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':IDCI_Contact', $IDCI_Contact);
         $stmt->bindParam(':email_contact', $email_contact);
+        $stmt->bindParam(':passnumber', $passnumber);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
 
         // Execute the statement

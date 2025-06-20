@@ -101,7 +101,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1rem, 3vw, 2.75rem);
     font-weight: bold;
     border-radius: 8px;
     border: none;
@@ -120,15 +120,6 @@ body {
     border: 1px solid #929292;
 }
 
-.sign-in::after {
-    content: "";
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>');
-    background-size: contain;
-    margin-top: 0.5rem; /* Space between text and icon */
-}
 
 .sign-out {
     /*background of the element*/
@@ -136,16 +127,6 @@ body {
     /*color of text inside element*/
     color: rgb(0, 0, 0);
     border: 1px solid #929292;
-}
-
-.sign-out::after {
-    content: "";
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>');
-    background-size: contain;
-    margin-top: 0.5rem; /* Space between text and icon */
 }
 
 /*pressing the button changes its size*/

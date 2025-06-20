@@ -18,15 +18,17 @@ try {
         $company = $_POST['company'];
         $reason = $_POST['reason'];
         $email_contact = $_POST['email_contact'];
+        $passnumber = $_POST['passnumber'];
         $sign_in_time = date('Y-m-d H:i:s');
 
-        $stmt = $conn->prepare("INSERT INTO guests (first_name, last_name, company, reason, email_contact, sign_in_time) 
-                                VALUES (:first_name, :last_name, :company, :reason, :email_contact, :sign_in_time)");
+        $stmt = $conn->prepare("INSERT INTO guests (first_name, last_name, company, reason, email_contact, passnumber, sign_in_time) 
+                                VALUES (:first_name, :last_name, :company, :reason, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':company', $company);
         $stmt->bindParam(':reason', $reason);
         $stmt->bindParam(':email_contact', $email_contact);
+        $stmt->bindParam(':passnumber', $passnumber);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
 
         $stmt->execute();
