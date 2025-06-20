@@ -50,16 +50,16 @@ try {
             ]);
 
             // Redirect to parking page
-            header('Location: ./html files/ParkingPage.html');
+            header('Location: ../html files/ParkingPage.html');
             exit;
         } else {
             // Redirect back to policy info if no signature is provided 
-            header('Location: ./html files/PolicyInfo.html');
+            header('Location: ../html files/PolicyInfo.html');
             exit;
         }
     } else {
         // Redirect back to policy info if no signature is provided 
-        header('Location: ./html files/PolicyInfo.html');
+        header('Location: ../html files/PolicyInfo.html');
         exit;
     }
 } catch (PDOException $e) {

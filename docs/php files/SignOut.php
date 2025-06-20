@@ -45,10 +45,10 @@ try {
     }
 
     if ($found) {
-        header('Location: ./html files/SignOutEndScreen.html');
+        header('Location: ../html files/SignOutEndScreen.html');
         exit;
     } else {
-        header('Location: ./html files/NoMatch.html');
+        header('Location: ../html files/NoMatch.html');
         exit;
     }
 

@@ -18,18 +18,16 @@ try {
         
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
-        $company = $_POST['company'];
-        $service = $_POST['service'];
-        $email_contact = $_POST['contact'];
+        $IDCI_Contact = $_POST['IDCI_Contact'];
+        $email_contact = $_POST['email_contact'];
         $passnumber = $_POST['passnumber'];
         $sign_in_time = date('Y-m-d H:i:s');
     
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO contractors (first_name, last_name, company, service, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :company, :service, :email_contact, :passnumber, :sign_in_time)");
+        $stmt = $conn->prepare("INSERT INTO interviews (first_name, last_name, IDCI_Contact, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':company', $company);
-        $stmt->bindParam(':service', $service);
+        $stmt->bindParam(':IDCI_Contact', $IDCI_Contact);
         $stmt->bindParam(':email_contact', $email_contact);
         $stmt->bindParam(':passnumber', $passnumber);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
@@ -37,11 +35,12 @@ try {
         // Execute the statement
         $stmt->execute();
 
+        // Save the inserted ID and type to session
         $_SESSION['guest_id'] = $conn->lastInsertId();
-        $_SESSION['sign_in_type'] = 'contractor';
+        $_SESSION['sign_in_type'] = 'interview';
 
         // Redirect to PolicyInfo.html on success
-        header("Location: ./html files/PolicyInfo.html");
+        header("Location: ../html files/PolicyInfo.html");
         exit();
     }
 } catch (PDOException $e) {

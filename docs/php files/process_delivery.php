@@ -51,7 +51,7 @@ try {
         $_SESSION['sign_in_type'] = 'guest';
 
         // Redirect to confirmation page
-        header("Location: ./html files/SignInEndScreen.html");
+        header("Location: ../html files/SignInEndScreen.html");
         exit();
     }
 } catch (PDOException $e) {
