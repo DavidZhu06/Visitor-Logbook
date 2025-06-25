@@ -42,7 +42,6 @@
       display: flex;
       flex-direction: column;
       position:relative; /* Added for positioning language button */
-      margin-top: 2vh; /* Added margin to ensure top visibility */
     }
     h2 {
       color: #6c757d;
@@ -50,11 +49,11 @@
     }
     p {
       color: #6c757d;
-      line-height: 1.6;
+      line-height: 1.5;
       text-align: left;
     }
     .signature-container {
-      margin: 15px 0;
+      margin-bottom: 15px; /*Controls only the space between signature container and button*/
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -124,9 +123,9 @@
   <form id="signatureForm" action="../php files/process_policy.php" method="post">
   <input type="hidden" id="signature" name="signature" value="">
   <div class="container">
-    <h2 data-key="companyName"></h2>
+    <h2 data-key="pageTitle"></h2>
     <div id="termsContent">
-      <h3 data-key="policyTitle"></h3>
+      <!--<h3 data-key="policyTitle">Please Read</h3>-->
       <p data-key="readInstruction"></p>
       <p><strong data-key="nonDisclosureTitle"></strong> <span data-key="nonDisclosureText"></span></p>
       <p><strong data-key="securityTitle"></strong><br><span data-key="securityIntro"></span></p>
@@ -139,10 +138,10 @@
         <li><p id="foodRule" data-key="foodRule">Not bring any food or beverage or smoke inside the warehouse.</p></li>
         <li><p id="productRule" data-key="productRule">Not handle any product if permitted inside the warehouse unless with prior permission.</p></li>
       </ol>
-      <p data-key="reviewInstruction">Please review these policies carefully before signing below.</p>
+      <!--<p data-key="reviewInstruction">Please review these policies carefully before signing below.</p>-->
     </div>
     <div class="signature-container">
-      <p data-key="signInstruction">Please e-sign below:</p>
+      <p data-key="signInstruction"></p>
       <canvas id="signatureCanvas"></canvas>
     </div>
     <div class="button-container">

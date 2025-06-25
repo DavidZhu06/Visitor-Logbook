@@ -123,8 +123,8 @@ resizeCanvas();
   const translations = {
     en: {
       title: "Visitor Access Policy",
-      companyName: "Imperial Distributors Canada Inc.",
-      policyTitle: "Visitor Access Policy",
+      pageTitle: "Visitor Access Policy",
+      // policyTitle: "Visitor Access Policy",
       readInstruction: "PLEASE READ IN ITS ENTIRETY BEFORE SIGNING.",
       nonDisclosureTitle: "I. NON-DISCLOSURE POLICY:",
       nonDisclosureText: `I understand that during my time at Imperial Distributors Canada Inc. (IDCI), I may access confidential or proprietary information. I agree not to disclose any such information, including personal, private, operational, or trade secrets, to anyone during or after my relationship with the Company, unless authorized or legally required. <br><br>
@@ -139,16 +139,16 @@ resizeCanvas();
       evacuationRule: "Immediately evacuate to the nearest exit upon emergency alarm. Once evacuated, the building is not to be re-entered until the incident is officially declared as over.",
       foodRule: "Not bring any food or beverage or smoke inside the warehouse.",
       productRule: "Not handle any product if permitted inside the warehouse unless with prior permission.",
-      reviewInstruction: "Please review these policies carefully before signing below.",
-      signInstruction: "Please e-sign below:",
+      //reviewInstruction: "Please review these policies carefully before signing below.",
+      signInstruction: "Please review these policies carefully and e-sign below:",
       clearBtn: "Clear",
       submitBtn: "Next",
       languageToggle: "FR"
     },
     fr: {
       title: "Politique d'accès des visiteurs",
-      companyName: "Imperial Distributors Canada Inc.",
-      policyTitle: "Politique d'accès des visiteurs",
+      pageTitle: "Politique d'accès des visiteurs",
+      //policyTitle: "Politique d'accès des visiteurs",
       readInstruction: "VEUILLEZ LIRE ENTIÈREMENT AVANT DE SIGNER.",
       nonDisclosureTitle: "I. POLITIQUE DE NON-DIVULGATION :",
       nonDisclosureText: `Je comprends que pendant mon temps chez Imperial Distributors Canada Inc. (IDCI), je peux accéder à des informations confidentielles ou exclusives. Je suis d’accord pour ne pas divulguer de telles informations, y compris des secrets personnels, privés, opérationnels ou commerciaux, à quiconque pendant ou après ma relation avec la Société, sauf autorisation ou exigence légale. <br><br>
@@ -163,8 +163,8 @@ resizeCanvas();
       evacuationRule: "Évacuer immédiatement vers la sortie la plus proche en cas d'alarme d'urgence. Une fois évacué, le bâtiment ne doit pas être réintégré tant que l'incident n'est pas officiellement déclaré terminé.",
       foodRule: "Ne pas apporter de nourriture, de boisson ou fumer à l'intérieur de l'entrepôt.",
       productRule: "Ne pas manipuler de produit si je suis autorisé à entrer dans l'entrepôt, sauf avec une autorisation préalable.",
-      reviewInstruction: "Veuillez examiner attentivement ces politiques avant de signer ci-dessous.",
-      signInstruction: "Veuillez signer électroniquement ci-dessous :",
+      //reviewInstruction: "Veuillez examiner attentivement ces politiques avant de signer ci-dessous.",
+      signInstruction: "Veuillez examiner attentivement ces politiques et signer électroniquement ci-dessous:",
       clearBtn: "Effacer",
       submitBtn: "Suivant",
       languageToggle: "EN"
