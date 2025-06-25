@@ -4,22 +4,22 @@
   const translations = {
     en: {
       languageToggle: "FR",
-      heading: "Parking Information",
-      guidelinesHeading: "Parking Guidelines",
-      paragraph1: "Welcome to the parking information page for Imperial Distributors Canada Inc. This measure is to prevent unauthorized vehicles from occupying spaces reserved for IDCI and Pure employees/visitors. Below are <b>general guidelines for parking</b> at our facility:",
-      paragraph2: "<b>1. Designated Areas:</b> Please park only in the areas marked for IDCI/PURE parking. <b>Unauthorized vehicles will be towed at the owner’s expense.</b>",
-      paragraph3: "<b>2. Parking Pass:</b> Parking passes must be clearly displayed or hung on your rearview mirror at all times while on company property. <b>Please make sure to get a parking pass upon arrival.</b>",
-      paragraph4: "<b>3. Time Limits:</b> Parking is limited to the duration of your visit. Overnight parking is not permitted without prior approval.",
+      heading: "Parking Guidelines",
+      guidelinesHeading: "ATTENTION VISITORS - PARKING NOTICE",
+      paragraph1: "To ensure smooth operations and the availability of parking for all our staff and authorized guests, <b>all visitors are required to display a valid Visitor Parking Pass while parked on company property.</b> Upon arrival, please be sure to:",
+      paragraph2: "<b>1. Designated Areas:</b> Park only in the areas marked for IDCI/PURE parking. <b>Unauthorized vehicles will be towed at the owner’s expense.</b>",
+      paragraph3: "<b>2. Parking Pass:</b> Request a Visitor Parking Pass. Once you recieve your pass, clearly display it on your vehicle’s dashboard with the printed side facing up and visible from outside the car.</b>",
+      paragraph4: "If you have any questions or are unsure where to park, our staff at the front desk will be happy to assist you. Thank you for your cooperation.",
       nextButton: "Next"
     },
     fr: {
       languageToggle: "EN",
-      heading: "Informations sur le stationnement",
-      guidelinesHeading: "Règles de stationnement",
-      paragraph1: "Bienvenue sur la page d'informations sur le stationnement d'Imperial Distributors Canada Inc. Cette mesure vise à empêcher les véhicules non autorisés d’occuper les places réservées aux employés/visiteurs de IDCI et Pure. Voici les règles <b>générales de stationnement</b> dans notre établissement:",
-      paragraph2: "<b>1. Zones désignées:</b> Veuillez stationner uniquement dans les zones marquées pour le stationnement IDCI/PURE. <b>Les véhicules non autorisés seront remorqués aux frais du propriétaire.</b>",
-      paragraph3: "<b>2. Pass de stationnement:</b> Les passes de stationnement doivent être clairement affichées ou accrochées à votre rétroviseur pendant toute la durée de votre présence sur la propriété de l’entreprise. <b>Veuillez vous assurer d’en obtenir un à votre arrivée.</b>",
-      paragraph4: "<b>3. Durée limite:</b> Le stationnement est limité à la durée de votre visite. Le stationnement de nuit n’est pas autorisé sans approbation préalable.",
+      heading: "Informations de stationnement",
+      guidelinesHeading: "ATTENTION VISITEURS - AVIS DE STATIONNEMENT",
+      paragraph1: "Pour assurer le bon fonctionnement et la disponibilité du stationnement pour tout notre personnel et nos invités autorisés, <b>tous les visiteurs sont tenus d’afficher un laissez-passer de stationnement pour visiteurs valide lorsqu’ils sont garés sur la propriété de l’entreprise. </b> À l’arrivée, assurez-vous de :",
+      paragraph2: "<b>1. Zones désignées :</b> Garez-vous uniquement dans les zones marquées pour le stationnement IDCI/PURE. <b>Les véhicules non autorisés seront remorqués aux frais du propriétaire.</b>",
+      paragraph3: "<b>2. Carte de stationnement :</b> Demandez une carte de stationnement pour visiteurs. Une fois que vous recevez votre laissez-passer, affichez-le clairement sur le tableau de bord de votre véhicule avec le côté imprimé vers le haut et visible de l’extérieur de la voiture.",
+      paragraph4: "Si vous avez des questions ou si vous ne savez pas où vous garer, notre personnel à la réception se fera un plaisir de vous aider. Merci pour votre coopération.",
       nextButton: "Suivant"
     }
   };
