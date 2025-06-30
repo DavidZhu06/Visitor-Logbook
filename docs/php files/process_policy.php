@@ -1,11 +1,13 @@
 <?php
 session_start(); // Access session variables
 
-// Database connection settings
-$host = 'localhost';
-$dbname = 'visitorlogbook_db';
-$username = 'root';
-$password = 'IDCIp@ssDZ2025!';
+$config = require __DIR__ . '/../config.php';
+
+$host = $config['host'];
+$dbname = $config['dbname'];
+$username = $config['username'];
+$password = $config['password'];
+
 
 try {
     // Create PDO connection
@@ -20,7 +22,11 @@ try {
         $signature = preg_replace('/^data:image\/(png|jpeg);base64,/', '', $signature);
 
         // Save as PNG file (for download/debug/logging - Optional)
-        $file_path = 'signatures/signature_' . time() . '.png';
+        $sign_in_time = $_SESSION['sign_in_time'] ?? date('Y-m-d H:i:s');
+        $date = str_replace([':', ' '], ['-', '_'], $sign_in_time); // Replace : and space with - and _
+
+
+        $file_path = 'signatures/signature_' . $date . '.png'; //$date .  instead of time()
         if (!file_exists('signatures')) {
             mkdir('signatures', 0755, true);
         }

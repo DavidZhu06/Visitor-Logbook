@@ -2,14 +2,15 @@
 
 session_start(); // <-- Needed to use $_SESSION
 
-// Database connection
-$host = "localhost";
-$dbname = "visitorlogbook_db";
-$username = "root";
-$password = "IDCIp@ssDZ2025!";
+$config = require __DIR__ . '/../config.php';
+
+$host = $config['host'];
+$dbname = $config['dbname'];
+$username = $config['username'];
+$password = $config['password'];
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Check if form is submitted
@@ -38,6 +39,24 @@ try {
         // Save the inserted ID and type to session
         $_SESSION['guest_id'] = $conn->lastInsertId();
         $_SESSION['sign_in_type'] = 'interview';
+
+        
+
+        // Store sign_in_time in session for use in signature filename
+        $_SESSION['sign_in_time'] = $sign_in_time;
+
+
+
+        // Send email to the entered email address
+        require_once 'send-mail.php';
+        $recipientName = trim($first_name . ' ' . $last_name);
+        // Attempt to send email, but don't interrupt flow on failure
+        if (!sendEmail($email_contact, $recipientName, $first_name)) {
+            error_log("Failed to send email to $email_contact at " . date('Y-m-d H:i:s'));
+        }
+
+
+
 
         // Redirect to PolicyInfo.html on success
         header("Location: ../html files/PolicyInfo.html");

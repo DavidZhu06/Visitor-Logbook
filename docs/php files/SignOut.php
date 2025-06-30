@@ -1,8 +1,13 @@
 <?php
-$host = 'localhost';
-$dbname = 'visitorlogbook_db';
-$username = 'root';
-$password = 'IDCIp@ssDZ2025!';
+
+// Load configuration
+$config = require __DIR__ . '/../config.php';
+
+// Database connection
+$host = $config['host'];
+$dbname = $config['dbname'];
+$username = $config['username'];
+$password = $config['password'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -43,6 +48,7 @@ try {
             break; // stop after first match
         }
     }
+
 
     if ($found) {
         header('Location: ../html files/SignOutEndScreen.html');
