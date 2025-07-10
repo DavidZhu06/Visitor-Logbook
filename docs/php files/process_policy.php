@@ -31,6 +31,13 @@ try {
             mkdir('signatures', 0755, true);
         }
         file_put_contents($file_path, base64_decode($signature));
+
+
+
+        $_SESSION['signature_path'] = $file_path;
+
+
+
         
         // Lookup table based on sign-in type
         $table_map = [
@@ -54,6 +61,37 @@ try {
                 ':signature' => $signature,
                 ':id' => $guest_id
             ]);
+
+
+            require_once 'send-mail.php';
+
+            $formData = [
+                'first_name' => $_SESSION['first_name'] ?? '',
+                'last_name' => $_SESSION['last_name'] ?? '',
+                'company' => ($sign_in_type === 'interview') ? 'N/A' : ($_SESSION['company'] ?? ''),
+                'service' => ($sign_in_type === 'interview') ? 'N/A' : ($_SESSION['service'] ?? ''),
+                'email_contact' => $_SESSION['contact'] ?? '',
+                'passnumber' => $_SESSION['passnumber'] ?? '',
+                'sign_in_time' => $_SESSION['sign_in_time'] ?? '',
+                'IDCI_Contact' => ($_SESSION['sign_in_type'] === 'interview') ? ($_SESSION['contact'] ?? '') : '',
+
+            ];
+
+            $recipientEmail = $_SESSION['email_contact'] ?? '';
+            $recipientName = trim($formData['first_name'] . ' ' . $formData['last_name']);
+
+            if (!sendEmail($recipientEmail, $recipientName, $formData)) {
+                error_log("Failed to send email to $recipientEmail at " . date('Y-m-d H:i:s'));
+            }
+
+
+
+
+
+
+
+
+
 
             // Redirect to parking page
             header('Location: ../html files/ParkingPage.html');

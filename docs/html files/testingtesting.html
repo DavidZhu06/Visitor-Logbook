@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guest Sign-In</title>
+  <link rel="stylesheet" href="./../css files/GuestInfo.css" />
+</head>
+<body>
+  <div class="flow-container">
+    <img src="./../images/idcilogo.jpg" alt="Imperial Distributors Canada Inc. Logo" class="logo" />
+    <h1 class="welcome-text">Guest Sign-In</h1>
+    <p class="select-text">Please fill in the below fields.</p>
+    
+    <form class="visitor-form" action="../php files/process_guest.php" method="post">
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first_name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last_name" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label for="reason">Reason for Visit</label>
+        <input type="text" id="reason" name="reason" placeholder="e.g., Appointment with" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label for="Company">Company</label>
+        <input type="text" id="company" name="company" placeholder="e.g., Vendor Name" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email_contact" placeholder="username@domainname.com" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label for="passnumber">Visitor Pass Number</label>
+        <input type="number" id="passnumber" name="passnumber" placeholder="Please enter the provided visitor pass number" required />
+      </div>
+
+      <button type="submit" class="flow-button">Next</button>
+    </form>
+  </div>
+</body>
+</html>
