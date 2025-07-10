@@ -14,14 +14,12 @@
     <p class="select-text">We appreciate your cooperation.</p>
   </div>
     <script>
-        // Trigger fade-out animation after 4 seconds, then redirect after 1 second (total 5 seconds)
+        // Trigger redirect to the main page after 2 seconds
         setTimeout(() => {
-            document.body.classList.add('fade-out');
-            setTimeout(() => {
-                window.location.href = "./../index.html"; // Replace with actual sign-in URL
-            }, 1000); // Wait for fade-out animation to complete
-        }, 2000); // Start fade-out after 2 seconds
+            window.location.href = "./../index.html";
+        }, 2000);
     </script>
+
 
     <script>
     // Insert current date and time
