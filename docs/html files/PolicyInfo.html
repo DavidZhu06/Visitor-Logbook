@@ -6,13 +6,13 @@
   <title data-key="title">Visitor Access Policy</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: 2vw; /*responsive padding so that it never completely dissappears no matter how small I make the viewport */
+      /*padding: 2vw; responsive padding so that it never completely dissappears no matter how small I make the viewport - not applicable here */
     }
 
      /* Animated background element */
@@ -36,12 +36,14 @@
       background: white;
       padding: 20px;
       border-radius: 10px;
-      width: 80%;
-      max-width: 600px;
+      width: 600px;
+      max-width: 90%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       position:relative; /* Added for positioning language button */
+      box-sizing: border-box;
+      margin: 1.5rem; /* Added margin to prevent content from touching viewport edges */
     }
     h2 {
       color: #6c757d;
@@ -64,7 +66,7 @@
       cursor: crosshair;
       touch-action: none; /* Prevents default touch behaviors like scrolling */
       width: 100%;
-      height: 200px;
+      height: 250px;
     }
     .button-container {
       display: flex;

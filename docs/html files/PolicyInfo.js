@@ -10,7 +10,7 @@ let signatureData = []; // Array to store signature data if needed
 let currentLanguage = 'en'; // Default language
 
 //specify drawing style
-ctx.lineWidth = 2;
+ctx.lineWidth = 3;
 ctx.lineCap = 'round';
 ctx.lineJoin = 'round'; // Smooths line connections
 ctx.strokeStyle = '#000';
