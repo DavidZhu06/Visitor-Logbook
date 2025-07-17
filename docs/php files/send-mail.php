@@ -37,8 +37,17 @@ try {
     $mail->isHTML(true); // Email body supports HTML
     $mail->Subject = 'Test Email from PHP on IIS';
 
-    $mail->Body    = 'Hello, this is a test email sent securely via <b>smtp.office365.com</b><br><br> Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc on <b>' . htmlspecialchars($visitDate) . '</b>. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
-    $mail->AltBody = 'Hello,' . $recipientName . 'this is a test email sent securely via <b>smtp.office365.com</b>. The following will act as placeholders until the email is fully implemented: <br><br> Dear Valued Visitor,<br><br>Thank you for visiting Imperial Distributors Canada Inc on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
+    $mail->Body    = 'Hello, this is a test email sent securely via <b>smtp.office365.com</b><br><br> Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc on <b>' . htmlspecialchars($visitDate) . '</b>. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
+    $mail->AltBody = 'Hello, this is a test email sent securely via smtp.office365.com
+    Dear ' . $recipientName . ',
+
+    Thank you for visiting Imperial Distributors Canada Inc on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.
+
+    Attached please find a copy of your information you executed during your sign-in process.
+
+    Imperial Distributors Canada Inc.';
+
+
     // 🧾 Generate PDF using mPDF (ChatGPT)
     $mpdf = new \Mpdf\Mpdf();
 
@@ -46,10 +55,10 @@ try {
 
     if ($signaturePath && file_exists($signaturePath)) {
         $imageData = base64_encode(file_get_contents($signaturePath));
-        $signatureImageTag = '<p><strong>Signature:</strong><br><img src="data:image/png;base64,' . $imageData . '" style="width:300px;" /></p>';
+        $signatureImageTag = '<p><strong>SIGNATURE:</strong><br><img src="data:image/png;base64,' . $imageData . '" style="width:300px;" /></p>';
     }
     else {
-            $signatureImageTag = '<p><strong>Signature:</strong> (Not Available)</p>';
+            $signatureImageTag = '<p><strong>SIGNATURE:</strong> (Not Available)</p>';
     }
 
     $html = "
@@ -60,6 +69,7 @@ try {
         <p><strong>Pass Number:</strong> {$formData['passnumber']}</p>
         <p><strong>IDCI Contact:</strong> " . (!empty($formData['IDCI_Contact']) ? htmlspecialchars($formData['IDCI_Contact']) : 'N/A') . "</p>
         <p><strong>Sign-In Time:</strong> {$formData['sign_in_time']}</p>
+        <p>___________________________________________________</p>
         <p><strong>NON-DISCLOSURE POLICY:</strong> <br>I understand that during my time at Imperial Distributors Canada Inc. (IDCI), I may access confidential or proprietary information. I agree not to disclose any such information, including personal, private, operational, or trade secrets, to anyone during or after my relationship with the Company, unless authorized or legally required.
         I will not remove, copy, photograph, or otherwise record any documents or information, in any form, without written permission from IDCI. <strong>I will not photograph or otherwise record any information which I may have access to during my visit.</strong>
         I acknowledge that this information is valuable and not publicly known, and that improper disclosure could cause serious harm. IDCI may seek legal or injunctive action for any breach. Violations may result in legal consequences and termination of access to the Company or its premises.<br><br>
@@ -82,7 +92,9 @@ try {
     $mpdf->WriteHTML($html);
 
     // Save PDF to a file
-    $pdfPath = __DIR__ . "/../../pdfrecord/visitor_log_{$formData['first_name']}_{$formData['last_name']}.pdf";
+    $rawSignInTime = $formData['sign_in_time'];
+    $sanitizedTimestamp = date('Ymd_His', strtotime($rawSignInTime));
+    $pdfPath = __DIR__ . "/../../pdfrecord/visitor_log_{$formData['first_name']}_{$formData['last_name']}.pdf_{$sanitizedTimestamp}.pdf";
     $mpdf->Output($pdfPath, \Mpdf\Output\Destination::FILE); 
     
 
