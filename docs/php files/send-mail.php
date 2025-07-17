@@ -37,7 +37,7 @@ try {
     $mail->isHTML(true); // Email body supports HTML
     $mail->Subject = 'Test Email from PHP on IIS';
 
-    $mail->Body    = 'Hello, this is a test email sent securely via <b>smtp.office365.com</b><br><br> Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
+    $mail->Body    = 'Hello, this is a test email sent securely via <b>smtp.office365.com</b><br><br> Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc on <b>' . htmlspecialchars($visitDate) . '</b>. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
     $mail->AltBody = 'Hello,' . $recipientName . 'this is a test email sent securely via <b>smtp.office365.com</b>. The following will act as placeholders until the email is fully implemented: <br><br> Dear Valued Visitor,<br><br>Thank you for visiting Imperial Distributors Canada Inc on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
     // 🧾 Generate PDF using mPDF (ChatGPT)
     $mpdf = new \Mpdf\Mpdf();
@@ -53,7 +53,7 @@ try {
     }
 
     $html = "
-        <h2 style=\"text-align: center;\">$recipientName</h2>
+        <h2 style=\"text-align: center;\">{$recipientName} Sign-In Log</h2>
         <p><strong>Name:</strong> {$formData['first_name']} {$formData['last_name']}</p>
         <p><strong>Company:</strong> {$formData['company']}</p>
         <p><strong>Reason/Service:</strong> {$formData['service']}</p>
@@ -82,7 +82,7 @@ try {
     $mpdf->WriteHTML($html);
 
     // Save PDF to a file
-    $pdfPath = __DIR__ . "/visitor_log_{$formData['first_name']}_{$formData['last_name']}.pdf";
+    $pdfPath = __DIR__ . "/../../pdfrecord/visitor_log_{$formData['first_name']}_{$formData['last_name']}.pdf";
     $mpdf->Output($pdfPath, \Mpdf\Output\Destination::FILE); 
     
 
@@ -94,11 +94,12 @@ try {
     error_log("Email has been sent to {$recipientEmail}");
 
 
-    // Clean up PDF
+    // Deletes PDF - for david to note
+    /*
     if (file_exists($pdfPath)) {
         unlink($pdfPath);
     }
-
+    */
 
     return true; // Indicate success
 } catch (Exception $e) {

@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Prevents any accidental output before headers
 session_start(); // Access session variables
 
 $config = require __DIR__ . '/../config.php';
@@ -110,9 +111,11 @@ try {
     // Handle database errors
     http_response_code(500);
     echo "Database error: " . $e->getMessage();
+    //header('Location: ../html files/ParkingPage.html'); // Redirect to parking page on error
 } catch (Exception $e) {
     // Handle other errors
     http_response_code(400);
     echo "Error: " . $e->getMessage();
+    //header('Location: ../html files/ParkingPage.html');
 }
 ?>
