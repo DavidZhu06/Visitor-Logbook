@@ -30,7 +30,7 @@ PHPMailer Library: https://github.com/phpmailer
 mPDF Library: https://github.com/mpdf/mpdf
 Composer (for mPDF installation)
 
-Installation (May or may not be entirely accurate - was learning as I was writing this): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
+**Installation** (May or may not be entirely accurate - was learning as I was writing this): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
 
 **CONTACT**:
 For questions or feedback, please contact:
