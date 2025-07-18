@@ -24,17 +24,18 @@ Server: Microsoft IIS
 **Requirements**:  
 PHP Version 8.4.x or higher  
 MySQL Server 8.0.41 or higher  
-  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails.  
+  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails.
 IIS Web Server with FastCGI enabled  
 PHPMailer Library: https://github.com/phpmailer  
 mPDF Library: https://github.com/mpdf/mpdf  
 Composer (for mPDF installation)  
 
-**Installation** (May or may not be entirely accurate - was learning as I was writing this): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
+**Installation**   
+(May or may not be entirely accurate - was learning as I was writing this): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
 
-**CONTACT**:
-For questions or feedback, please contact:
-**David Zhu**
-david.zhu@idci.ca
+**CONTACT**:  
+For questions or feedback, please contact:  
+**David Zhu**  
+david.zhu@idci.ca  
 
 
