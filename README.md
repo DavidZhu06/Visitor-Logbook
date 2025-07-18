@@ -14,11 +14,11 @@ Below are some **KEY FEATURES**:
 4. Visitor Data Storage
   - All visitor form data stored in MySQL database - admin can easily access and manage data via MySQL Workbench with option to export logs to CSV.     Vistor signatures are stored as Base64 strings, and copies of visitors' form submissions are also saved.
   
-**Tech Stack**:
-Frontend: HTML, CSS, JavaScript
-Backend: PHP 
-Automatic Email & PDF: PHPMailer & mPDF libraries
-Database: MySQL (accessible via MySQL Workbench for admin without coding experience to use)
+**Tech Stack**:  
+Frontend: HTML, CSS, JavaScript  
+Backend: PHP   
+Automatic Email & PDF: PHPMailer & mPDF libraries  
+Database: MySQL (accessible via MySQL Workbench for admin without coding experience to use)  
 Server: Microsoft IIS
 
 **Requirements**:
