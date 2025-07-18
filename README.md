@@ -31,7 +31,7 @@ mPDF Library: https://github.com/mpdf/mpdf
 Composer (for mPDF installation)
 
 **Installation**:
-
+[View Installation PDF (may or may not be entirely accurate)](./docs/Installation of Visitor Logbook.pdf)
 
 **CONTACT**:
 For questions or feedback, please contact:
