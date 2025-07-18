@@ -24,7 +24,7 @@ Server: Microsoft IIS
 **Requirements**:
 PHP Version 8.4.x or higher
 MySQL Server 8.0.41 or higher
-  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails. 
+  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails.
 IIS Web Server with FastCGI enabled
 PHPMailer Library: https://github.com/phpmailer
 mPDF Library: https://github.com/mpdf/mpdf
