@@ -5,8 +5,16 @@ body {
     align-items: center;
     min-height: 100vh; /*body will always take full viewport height */
     margin: 0;
-    padding: 2vw; /*responsive padding so that it never completely dissappears no matter how small I make the viewport */
+    padding: 1vw; /*responsive padding so that gap between screen edge and the container never completely dissappears no matter how small I make the viewport */
 }
+
+/* Media query for smaller screens like iPads */
+@media screen and (max-height: 600px) {
+    body {
+        padding: 1.5rem; /* Smaller fixed padding for screens up to 1024px wide */
+    }
+}
+
 
 /* Animated background element */
 body::before {
@@ -26,15 +34,17 @@ body::before {
 }
 
 .container {
-    position: relative;
     background: white;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 850px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden; /* prevents internal overflow leak */
+    /* overflow-y: auto;  Scroll only inside container if needed */
 }
 
 h2 {
@@ -51,7 +61,7 @@ p {
 }
 
 .parking-info {
-    height: 300px; 
+    height: 27vh; 
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
@@ -59,7 +69,7 @@ p {
 }
 
 .parking-image-container {
-    margin: 15px 0;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
 }

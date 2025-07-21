@@ -6,13 +6,21 @@
   <title data-key="title">Visitor Access Policy</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
       /*padding: 2vw; responsive padding so that it never completely dissappears no matter how small I make the viewport - not applicable here */
+    }
+
+
+  /* Media query for smaller screens like iPads */
+    @media screen and (max-height: 600px) {
+      body {
+          padding: 1.5rem; /* Smaller fixed padding for screens up to 1024px wide */
+      }
     }
 
      /* Animated background element */
@@ -34,17 +42,17 @@
 
     .container {
       background: white;
-      padding: 20px;
+      padding: 0 20px 20px 20px;
       border-radius: 10px;
-      width: 600px;
-      max-width: 90%;
+      width:90%;
+      max-width: 850px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       position:relative; /* Added for positioning language button */
       box-sizing: border-box;
-      margin: 1.5rem; /* Added margin to prevent content from touching viewport edges */
     }
+
     h2 {
       color: #6c757d;
       text-align: center;
@@ -96,7 +104,7 @@
       transform: scale(0.9);
     }
     #termsContent {
-      height: 300px; /* Increased from 300px to make the box bigger */
+      height: 250px; 
       overflow-y: auto;
       border: 1px solid #ccc;
       padding: 10px;

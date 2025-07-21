@@ -145,3 +145,16 @@ body {
 .nowrap {
     white-space: nowrap;
 }
+
+.signout-reminder {
+    margin-top: 1.5rem;
+    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    color: #333;
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+    line-height: 1.4;
+    font-weight: 500;
+}

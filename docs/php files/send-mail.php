@@ -35,13 +35,13 @@ try {
 
     // CONTENT
     $mail->isHTML(true); // Email body supports HTML
-    $mail->Subject = 'Test Email from PHP on IIS';
+    $mail->Subject = 'Imperial Distributors Canada Inc. - Confirmation of Visit';
 
-    $mail->Body    = 'Hello, this is a test email sent securely via <b>smtp.office365.com</b><br><br> Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc on <b>' . htmlspecialchars($visitDate) . '</b>. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
-    $mail->AltBody = 'Hello, this is a test email sent securely via smtp.office365.com
+    $mail->Body    = 'Dear ' . $recipientName . ', <br><br>Thank you for visiting Imperial Distributors Canada Inc. on <b>' . htmlspecialchars($visitDate) . '</b>. We appreciate you taking the time to stop by our facility.<br><br>Attached please find a copy of your information you executed during your sign-in process.<br><br>Imperial Distributors Canada Inc. ';
+    $mail->AltBody = '
     Dear ' . $recipientName . ',
 
-    Thank you for visiting Imperial Distributors Canada Inc on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.
+    Thank you for visiting Imperial Distributors Canada Inc. on ' . $visitDate . '. We appreciate you taking the time to stop by our facility.
 
     Attached please find a copy of your information you executed during your sign-in process.
 
@@ -67,7 +67,7 @@ try {
         <p><strong>Company:</strong> {$formData['company']}</p>
         <p><strong>Reason/Service:</strong> {$formData['service']}</p>
         <p><strong>Pass Number:</strong> {$formData['passnumber']}</p>
-        <p><strong>IDCI Contact:</strong> " . (!empty($formData['IDCI_Contact']) ? htmlspecialchars($formData['IDCI_Contact']) : 'N/A') . "</p>
+        <p><strong>Imperial Distributors Canada Inc. Contact:</strong> " . (!empty($formData['IDCI_Contact']) ? htmlspecialchars($formData['IDCI_Contact']) : 'N/A') . "</p>
         <p><strong>Sign-In Time:</strong> {$formData['sign_in_time']}</p>
         <p>___________________________________________________</p>
         <p><strong>NON-DISCLOSURE POLICY:</strong> <br>I understand that during my time at Imperial Distributors Canada Inc. (IDCI), I may access confidential or proprietary information. I agree not to disclose any such information, including personal, private, operational, or trade secrets, to anyone during or after my relationship with the Company, unless authorized or legally required.
@@ -77,7 +77,7 @@ try {
         <strong>SECURITY, SAFETY & GMP POLICY:</strong> <br>
         I acknowledge that I will: <br>
         <ol>
-            <li>Be escorted by an IDCI team member while inside the building.</li>
+            <li>Be escorted by an Imperial Distributors team member while inside the building.</li>
             <li>Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.</li>
             <li>Sign-in and sign-out of restricted areas where required.</li>
             <li>Maintain all exterior and interior doors in a closed position.</li>

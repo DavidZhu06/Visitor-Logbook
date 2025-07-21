@@ -132,7 +132,7 @@ resizeCanvas();
       I acknowledge that this information is valuable and not publicly known, and that improper disclosure could cause serious harm. IDCI may seek legal or injunctive action for any breach. Violations may result in legal consequences and termination of access to the Company or its premises.`,
       securityTitle: "II. SECURITY, SAFETY & GMP POLICY:",
       securityIntro: "I acknowledge that I will:",
-      escortRule: "Be escorted by an IDCI employee while inside the building.",
+      escortRule: "Be escorted by an IDCI team member while inside the building.",
       accessCardRule: "Visibly display the visitor access card (if assigned) at all times while inside the building and return it upon my exit out of the building.",
       signInRule: "Sign-in and sign-out of restricted areas where required.",
       doorsRule: "Maintain all exterior and interior doors in a closed position.",
