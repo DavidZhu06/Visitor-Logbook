@@ -14,27 +14,28 @@ Below are some **KEY FEATURES**:
 4. Visitor Data Storage
   - All visitor form data stored in MySQL database - admin can easily access and manage data via MySQL Workbench with option to export logs to CSV.     Vistor signatures are stored as Base64 strings, and copies of visitors' form submissions are also saved.
   
-**Tech Stack**:
-Frontend: HTML, CSS, JavaScript
-Backend: PHP 
-Automatic Email & PDF: PHPMailer & mPDF libraries
-Database: MySQL (accessible via MySQL Workbench for admin without coding experience to use)
+**Tech Stack**:  
+Frontend: HTML, CSS, JavaScript  
+Backend: PHP   
+Automatic Email & PDF: PHPMailer & mPDF libraries  
+Database: MySQL (accessible via MySQL Workbench for admin without coding experience to use)  
 Server: Microsoft IIS
 
-**Requirements**:
+**Requirements**:  
 PHP Version 8.4.x or higher
-MySQL Server 8.0.41 or higher
-  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails. 
-IIS Web Server with FastCGI enabled
-PHPMailer Library: https://github.com/phpmailer
-mPDF Library: https://github.com/mpdf/mpdf
-Composer (for mPDF installation)
+IIS Web Server with FastCGI enabled  
+PHPMailer Library: https://github.com/phpmailer  
+mPDF Library: https://github.com/mpdf/mpdf  
+Composer (for mPDF installation)    
+MySQL Server 8.0.41 or higher  
+  - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise      will fail to post the data) , as well as a valid email account set up for sending emails.
 
-Installation: [View Installation PDF (may or may not be entirely accurate)](./docs/Installation%20of%20Visitor%20Logbook.pdf)
+**Installation**   
+(May or may not be entirely accurate - was learning as I was writing this): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
 
-**CONTACT**:
-For questions or feedback, please contact:
-**David Zhu**
-david.zhu@idci.ca
+**CONTACT**:  
+For questions or feedback, please contact:  
+**David Zhu**  
+david.zhu@idci.ca  
 
 
