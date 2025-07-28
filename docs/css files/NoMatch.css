@@ -1,11 +1,15 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    margin:0;
+    font-family: 'Inter', sans-serif;
+   /*Inter is the preferred font, sans-serif is the generic fallback font (if Inter doesn't load)*/
+    display: flex; /*turns HTML element into flexbox container*/
+    flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
+    justify-content: center; /*tells flex container to lay child elements vertically because flex direction is column*/
+    align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
+    min-height: 100vh; /*vh = viewport height   number in front is the % of*/
+    padding: 1rem; /*equals font size of html element*/
+    box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
+    overflow-x: hidden; /*prevents horizontal scroll on small screens*/
 }
 
 /* Animated background */

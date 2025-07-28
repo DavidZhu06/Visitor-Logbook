@@ -2,13 +2,18 @@
 ob_start(); // Prevents any accidental output before headers
 session_start(); // Access session variables
 
+// Load configuration
 $config = require __DIR__ . '/../config.php';
 
-$host = $config['host'];
-$dbname = $config['dbname'];
-$username = $config['username'];
-$password = $config['password'];
+$env = 'production'; // Change this to 'production' when deploying
 
+$dbConfig = $config[$env]; // Get the correct config
+
+// Database connection
+$host = $dbConfig['host'];
+$dbname = $dbConfig['dbname'];
+$username = $dbConfig['username'];
+$password = $dbConfig['password'];
 
 try {
     // Create PDO connection

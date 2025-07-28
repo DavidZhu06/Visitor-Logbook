@@ -1,8 +1,17 @@
 <?php
-//safe to commit
+// safe to commit — contains placeholder credentials
+
 return [
-    'host' => 'hostname',
-    'dbname' => 'database_name',
-    'username' => 'database_username'
-    'password' => 'database_password',
+    'production' => [
+        'host' => 'prod_hostname',
+        'dbname' => 'prod_database_name',
+        'username' => 'prod_database_username',
+        'password' => 'prod_database_password',
+    ],
+    'staging' => [
+        'host' => 'staging_hostname',
+        'dbname' => 'staging_database_name',
+        'username' => 'staging_database_username',
+        'password' => 'staging_database_password',
+    ],
 ];

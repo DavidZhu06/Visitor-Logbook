@@ -3,17 +3,21 @@
 <html lang="en">
 <head>
     <meta charset ="UTF-8"/>
-    <!--Following line adjusts viewport (user's visible area of webpage) depending on device-->
+    <!--this page uses UTF-8 to store and read characters (mandatory). The Unicode Standard is like a master list of all characters of all languages and assigns each character a unique number (ex. A = U+0041). UTF-8 then encodes that unique number into bytes (U+0041 -> 01000001 - 1 byte = 8 bits). The browser reads these 1s and 0s and knows to intpret them using UTF-8 decoding rules, bringing them back from bytes into readable characters-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.-->
+    <!--This line adjusts viewport (user's visible area of webpage) depending on device. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.-->
     <title>Visitor Management Kiosk</title>
-   <!--<base href="https://davidzhu06.github.io/Visitor-Logbook/"> --> <!--base html tag tells browser that when resolving any relative links, always start from this base URL. Without it, if you open the page thorugh a slightly different URL (or manually type into broswer), the page loads index.css from the wrong location like: https://davidzhu06.github.io/Visitor-Logbook/index.html/index.css (fails, CSS won't load) since css file is assumed to be relative to where html file is located--> 
+   <!--<base href="https://davidzhu06.github.io/Visitor-Logbook/"> --> <!--Tells the browser that any relative path on the page must be treated as if it's relative to https://davidzhu06.github.io/Visitor-Logbook/. For example, if index.html is loaded from: https://davidzhu06.github.io/Visitor-Logbook/index.html, and you use a relative path like <link rel = "stylesheet" href="index.css">, the browser will try to load https://davidzhu06.github.io/Visitor-Logbook/index.html/index.css which will fail. Using base, the path will correctly resolve to https://davidzhu06.github.io/Visitor-Logbook/index.css --> 
     <!--IMPORTANT: MAKE SURE TO COMMENT IT OUT IF YOU WANT TO SEE CHANGES ON PREVIEW --> 
 
     <link rel="stylesheet" href="./css files/index.css">
-    <!--Linking corresponding external WelcomeScreen.css to HTML page
+    <!--Linking corresponding external index.css to HTML page
     link rel="stylesheet" defines relationship between linked file and current HTML document (only used if href attribute is present)
-    href attribute specifices the destination of the link, needs to be in the same folder-->
+    href attribute specifices the destination of the link, needs to be in the same folder
+    Understanding Path Symbols is very important: ./ refers to the current directory (the folder that the current file is in)
+    ../ means one level up from the current folder
+    ../../ means two levels up from the current folder
+    foldername/filename means go to the the subfolder "foldername" and retrieve filename-->
 </head>
 
 <body>
@@ -27,11 +31,11 @@
         <div class="divider-line"></div>
         
         <div class="button-layout">
-            <a href="./html files/chooseSignInFlow.html" class="button sign-in">Sign In </a>
-            <a href="./html files/SignOut.html" class="button sign-out">Sign Out</a>
+            <a href="./html files/chooseSignInFlow.html" class="button sign-in">Sign In </a> <!--Can also use div tag :   <div class="button sign-in" onclick="location.href='./html files/chooseSignInFlow.html'">Sign In</div>-->
+            <a href="./html files/SignOut.html" class="button sign-out">Sign Out</a> <!--Can also use div tag:   <div class="button sign-out" onclick="location.href='./html files/chooseSignInFlow.html'">Sign Out</div>-->
         </div>
 
-        <div class="signout-reminder">
+        <div class="reminder">
             If you plan to leave the site for more than two hours, please <strong>sign out</strong> before leaving and <strong>sign in again</strong> upon your return.
         </div>
 

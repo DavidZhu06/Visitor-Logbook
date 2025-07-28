@@ -5,11 +5,15 @@ session_start(); // <-- Needed to use $_SESSION
 // Load configuration
 $config = require __DIR__ . '/../config.php';
 
+$env = 'production'; // Change this to 'production' when deploying
+
+$dbConfig = $config[$env]; // Get the correct config
+
 // Database connection
-$host = $config['host'];
-$dbname = $config['dbname'];
-$username = $config['username'];
-$password = $config['password'];
+$host = $dbConfig['host'];
+$dbname = $dbConfig['dbname'];
+$username = $dbConfig['username'];
+$password = $dbConfig['password'];
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);

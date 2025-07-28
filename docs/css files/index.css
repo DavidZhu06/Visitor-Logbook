@@ -1,6 +1,6 @@
-/* Margin is space around element's border (control's space around element's border), while padding is space BETWEEN element's border and element's content (INSIDE element - makes it bigger)
-font-family is group of ofnts that share the same design
-display:flex is layout model (default: row) that allows arrangment of items inside container flexibily and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
+/* Margin is space around element's border (control's space around element's border), while padding is space BETWEEN element's border and element's content (INSIDE element - makes it take up more space)
+font-family is group of fonts that share the same design
+"display: flex" is layout model (default: row) that allows arrangment of items inside container flexibily and responsively - when applied to a container element (e.g. div) the flex items, container element's children, are adjusted dynamically to fit within container space  
 justify-content property controls alignment of main axis of flex items 
 align-items property controls alignment of the cross axis (perpendicular to main axis)
 height property - 100vh means min. height of element should be 100% of viewport height*/
@@ -16,10 +16,9 @@ body {
    /*Inter is the preferred font, sans-serif is the generic fallback font (if Inter doesn't load)*/
     display: flex; /*turns HTML element into flexbox container*/
     flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
-    justify-content: center; /*tells flex container to lay child elements vertically*/
+    justify-content: center; /*tells flex container to lay child elements vertically because flex direction is column*/
     align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
     min-height: 100vh; /*vh = viewport height   number in front is the % of*/
-    background-color:#1bb970;
     padding: 1rem; /*equals font size of html element*/
     box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
     overflow-x: hidden; /*prevents horizontal scroll on small screens*/
@@ -48,39 +47,37 @@ body {
     width: 90%; /*setting width prevents an element from stretching to fill the entire width of its parent container
     however, if viewport is smaller than width (for usage on smaller browser windows),max-width is needed*/
     max-width: 700px;
-    padding: 2vw; /*vw means viewport width, the number in front is the percentage of the width of the viewport - responsive design*/
-    height: auto;
+    padding: 1.5vw; /*vw means viewport width, the number in front is the percentage of the width of the viewport - responsive design*/
+    height: auto; /*container will grow/shrink automatically based on its content*/
     border-radius: 20px;
     /*rounds the corners*/
     box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.333);
     /*adds shadow effects around frame - horizontal offset (right), vertical offset (down), blur radius (shadow strength)*/
-    overflow-x: auto;
+    overflow-x: auto; /*if content inside container exceeds container size then a scrollbar may appear (only if necessary)*/
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-sizing: border box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
-    margin-bottom: 2rem;
+    box-sizing: border-box; /*controls how browser calculates element size (border box height and width includes content + padding + layout)- makes layout more preditable and easier to control. It will shrink the content area as needed to fit padding and border inside and kep the total width and height fixed at what you set*/
 }
 
 .logo {
     width: 20vw; 
     max-width: 150px;
     height: auto; /*preserves images aspect ratio (prevent distortion)*/
-    margin: 1rem auto 1rem auto; /*margin of picture: top right bottom left*/
+    margin: 0rem auto 1rem auto; /*margin of picture: top right bottom left. Auto in this case tells browser to automatically caluclate the margin to center the element horizontally*/
 }
 
 .brandname {
-    font-size: clamp(2rem, 5vw, 4rem); /*(never smaller than, ideally, never larger than)*/
+    font-size: clamp(2rem, 5vw, 4rem); /*(never smaller than - fixed value, ideally - relative value, never larger than - fixed value)*/
     font-weight: bold;
     color: #3f51b5;
-    margin-bottom:1rem
+    margin-bottom: 0.5rem
 }
 
 .subtext {
   color: #3f51b5;;
   font-size: clamp(1rem, 2vw ,4rem);
-  margin-bottom: rem;
 }
 
 /*the container*/
@@ -88,13 +85,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /*buttons must stay side by side - not super necessary in this case*/
     gap: 2rem;
 }
 
 .button {
     flex:1 1 0;
-    /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal fraction of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space)*/
+    /*flex: 1 is a shorthand property used in flexbox layout to specify how much space an item should take up relative to its sibling. 1 means each item will take up equal fraction of 100% of the space - responsive design (don't need to specify width, automatically adjusts to available space). The third number refers to flex-basis: initial main size of flex item before any growing or shrinking happens (starts at 0, flex grow or flex shrink deices who size proportionally)*/
     padding: 1.5rem;
     min-width: 120px;
     max-width: 50%;
@@ -103,8 +99,7 @@ body {
     align-items: center;
     font-size: clamp(1rem, 3vw, 2.75rem);
     font-weight: bold;
-    border-radius: 8px;
-    border: none;
+    border-radius: 8px; /*rounds the corners*/
     cursor: pointer;
     /*removes default underline browsers use to apply <a>*/
     text-decoration: none;
@@ -143,10 +138,10 @@ body {
 }
 
 .nowrap {
-    white-space: nowrap;
+    white-space: nowrap; /*prevents line wrapping*/
 }
 
-.signout-reminder {
+.reminder {
     margin-top: 1.5rem;
     font-size: clamp(0.9rem, 2vw, 1.25rem);
     color: #333;

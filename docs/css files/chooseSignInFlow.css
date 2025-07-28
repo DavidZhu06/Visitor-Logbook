@@ -1,13 +1,15 @@
 body {
+    margin:0;
     font-family: 'Inter', sans-serif;
-    background: #15ac65;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Changed to min-height to allow content to expand */
-    margin: 0;
-    padding: 1rem; /* Added padding for smaller screens */
-    box-sizing: border-box;
+   /*Inter is the preferred font, sans-serif is the generic fallback font (if Inter doesn't load)*/
+    display: flex; /*turns HTML element into flexbox container*/
+    flex-direction: column; /*sets the direction of the flex container's MAIN AXIS (default is row)*/
+    justify-content: center; /*tells flex container to lay child elements vertically because flex direction is column*/
+    align-items: center; /*aligns all child elements along CROSS AXIS, which is horizontal in this case*/
+    min-height: 100vh; /*vh = viewport height   number in front is the % of*/
+    padding: 1rem; /*equals font size of html element*/
+    box-sizing: border-box; /*controls how browser calculates element size when viewport is changed (border box includes content + padding + layout)- responsive design*/
+    overflow-x: hidden; /*prevents horizontal scroll on small screens*/
 }
 
 /* Animated background */
@@ -31,15 +33,18 @@ body::before {
     background: #ffffff;
     width: 90%;
     max-width: 700px;
-    aspect-ratio: 1 / 1; /* Kept aspect-ratio, but content can overflow */
+    aspect-ratio: 1 / 1; /* Sets a square shape (1:1 width to height ratio), but content can overflow */
     border-radius: 20px;
     box-shadow: 15px 40px 20px rgba(0, 0, 0, 0.333);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0.25rem;
-    box-sizing: border-box;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-bottom: 0rem;
+    padding-top: 0.5rem;
+    box-sizing: border-box; /* tells the browser to include the padding and border in the total width and height of the element*/
 }
 
 .logo {
@@ -50,10 +55,9 @@ body::before {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: bold;
     color: #2e2e2e;
-    margin-top: 1rem;
-    margin-bottom: 0.25rem;
+    margin-top: 0.5rem;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 2.5px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     font-variant: small-caps;
 }
@@ -63,7 +67,7 @@ body::before {
     color: #555;
     margin-bottom: 1.25rem;
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
     border-bottom: 2px solid #eee;
     width: 80%;
 }
@@ -73,15 +77,14 @@ body::before {
     max-width: 500px;
     height: 1px;
     background-color: #e0e0e0;
-    margin: 1.5rem 0;
 }
 
 .button-grid {
-    flex: 1;
-    width: 100%;
+    flex: 1 1 0;  /*grow and take up equal space relative to its siblings*/
+    width: 100%; /*tells element to be as wide as parent container - flow-container*/
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Two equal width columns */
+    grid-template-rows: 1fr 1fr; /* Two equal height rows */
     gap: 0;
 }
 
