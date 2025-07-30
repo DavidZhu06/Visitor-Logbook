@@ -12,15 +12,24 @@
     <h1 class="welcome-text">Sign-Out</h1>
     <p class="select-text">Please enter your details to sign out</p>
 
-    <form class="visitor-form" action="./../php files/SignOut.php" method="post">
+    <form class="visitor-form" action="./../php files/SignOut.php" method="post" onsubmit="return validateForm()">
       <div class="form-group">
         <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first-name" required />
+        <input type="text" id="first-name" name="first-name" />
       </div>
 
       <div class="form-group">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" required />
+        <input type="text" id="last-name" name="last-name" />
+      </div>
+
+      <div class="separator">
+        <span>------- or --------</span>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="passnumber">Visitor Pass Number</label>
+        <input type="number" id="passnumber" name="passnumber" placeholder="Please enter the provided pass number" />
       </div>
 
       <div class="button-group">
@@ -30,5 +39,22 @@
       
     </form>
   </div>
+  <script>
+      function validateForm() {
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const passNumber = document.getElementById('passnumber').value.trim();
+
+        const nameEntered = firstName !== '' && lastName !== '';
+        const passEntered = passNumber !== '';
+
+        if (nameEntered || passEntered) {
+          return true;
+        }
+
+        alert('Please either enter First name and Last name OR your assigned Visitor Pass Number.');
+        return false;
+      }
+  </script>
 </body>
 </html>

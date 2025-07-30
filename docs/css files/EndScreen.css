@@ -71,3 +71,15 @@ body::before {
     display: inline; /* Keep inline to avoid extra spacing */
     font-weight: bold; /* Bold the date */
 }
+
+.home-icon {
+  display: block;
+  margin: 0 auto 0 auto; /* Top margin, auto centers horizontally */
+  width: 80px;
+  height: 80px;
+}
+
+.home-icon img {
+  width: 100%;
+  height: auto;
+}

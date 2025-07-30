@@ -20,6 +20,19 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        date_default_timezone_set('America/Vancouver');
+        // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
+        $company = filter_input(INPUT_POST, 'company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['company']), ENT_QUOTES, 'UTF-8') : '';
+        $reason = filter_input(INPUT_POST, 'reason', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['reason']), ENT_QUOTES, 'UTF-8') : '';
+        $email_contact = filter_input(INPUT_POST, 'email_contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['email_contact']), ENT_QUOTES, 'UTF-8') : '';
+        $passnumber = filter_input(INPUT_POST, 'passnumber', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['passnumber']), ENT_QUOTES, 'UTF-8') : '';
+        $sign_in_time = date('Y-m-d H:i:s');
+
+
+        /* Can also use the following if you prefer not to use filter_input:
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $company = $_POST['company'];
@@ -27,6 +40,7 @@ try {
         $email_contact = $_POST['email_contact'];
         $passnumber = $_POST['passnumber'];
         $sign_in_time = date('Y-m-d H:i:s');
+        */
 
         $stmt = $conn->prepare("INSERT INTO guests (first_name, last_name, company, reason, email_contact, passnumber, sign_in_time) 
                                 VALUES (:first_name, :last_name, :company, :reason, :email_contact, :passnumber, :sign_in_time)");

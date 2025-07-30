@@ -30,15 +30,33 @@
         <input type="email" id="contact" name="contact" placeholder="username@domain.com" required />
       </div>
 
-
       <div class="form-group full-width">
-        <label for="company">Company</label>
-        <input type="text" id="company" name="company" required />
+        <label for="company">Company</label> <!--label is an html element that acts as a label for a field, Delivery Company is what users see on the page describing the field, for="company" attribute ties the Delivery Company label to the input field with id="company"-->
+        <select id="company" name="company" onchange="toggleCustomInput()" required>
+          <option value="">-- Please choose --</option>
+          <option value="Urban Impact">Urban Impact</option>
+          <option value="Van Houette">Van Houette</option>
+          <option value="Toshiba">Toshiba</option>
+          <option value="Chubb">Chubb</option>
+          <option value="Independent">INDEPENDENT</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="custom-company" name="custom_company" placeholder="Enter company name" style="display:none; margin-top: 10px;" required /> <!--After I click, other, the number of pixels between the drop down box and the newly appeared 'other' box-->
       </div>
 
       <div class="form-group full-width">
         <label for="service">Service Provided</label>
-        <input type="text" id="service" name="service" placeholder="e.g., HVAC Maintenance" required />
+        <select id="service" name="service" required onchange="toggleCustomInput()" required>
+          <option value="">-- Please choose --</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Recycling">Recycling</option>
+          <option value="Coffee Restock">Coffee Restock</option>
+          <option value="Installation">Installation</option>
+          <option value="Small Device Repair">Device Repair</option>
+          <option value="Small Device Repair">Facility Maintenance</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="custom-service" name="custom_service" placeholder="Enter service provided" style="display:none; margin-top: 10px;" required />
       </div>
 
       <div class="form-group full-width">
@@ -49,5 +67,38 @@
       <button type="submit" class="flow-button">Submit</button>
     </form>
   </div>
+
+    <!--The below script is for the dropdown menu for the delivery company-->
+<script>
+  function toggleCustomInput() {
+    const select = document.getElementById("company");
+    const customInput = document.getElementById("custom-company");
+
+    const selectService = document.getElementById("service");
+    const customInputService = document.getElementById("custom-service");
+
+    if (select.value === "Other") {
+      customInput.style.display = "block";
+      customInput.required = true;
+    } 
+    else {
+      customInput.style.display = "none";
+      customInput.required = false;
+      customInput.value = ""; // Clear the input if not needed
+    }
+
+
+    if (selectService.value === "Other") {
+      customInputService.style.display = "block";
+      customInputService.required = true;
+    } 
+    else {
+      customInputService.style.display = "none";
+      customInputService.required = false;
+      customInputService.value = ""; // Clear the input if not needed
+    }
+  }
+</script>
+
 </body>
 </html>

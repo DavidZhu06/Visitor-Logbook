@@ -22,7 +22,18 @@ try {
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         date_default_timezone_set('America/Vancouver');
-        
+        // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
+        $company = filter_input(INPUT_POST, 'company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['company']), ENT_QUOTES, 'UTF-8') : '';
+        $custom_company = filter_input(INPUT_POST, 'custom_company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['custom_company']), ENT_QUOTES, 'UTF-8') : '';
+        $email_contact = filter_input(INPUT_POST, 'contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['contact']), ENT_QUOTES, 'UTF-8') : '';
+        $service = filter_input(INPUT_POST, 'service', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['service']), ENT_QUOTES, 'UTF-8') : '';
+        $custom_service = filter_input(INPUT_POST, 'custom_service', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['custom_service']), ENT_QUOTES, 'UTF-8') : '';
+        $passnumber = filter_input(INPUT_POST, 'passnumber', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['passnumber']), ENT_QUOTES, 'UTF-8') : '';
+        $sign_in_time = date('Y-m-d H:i:s');
+
+        /* Can also use the following if you prefer not to use filter_input:
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $company = $_POST['company'];
@@ -30,8 +41,27 @@ try {
         $email_contact = $_POST['contact'];
         $passnumber = $_POST['passnumber'];
         $sign_in_time = date('Y-m-d H:i:s');
+        */
+        
+        // Determine the company name to store
+        $company_name = $company;
+        if ($company === "Other") {
+            if (empty($custom_company)) {
+                throw new Exception("Please enter a company name for 'Other'.");
+            }
+            $company_name = $custom_company;
+        }
+
+        // Determine the service name to store
+        $service_provided = $service;
+        if ($service === "Other") {
+            if (empty($custom_service)) {
+                throw new Exception("Please enter a company name for 'Other'.");
+            }
+            $service_provided = $custom_service;
+        }
     
-        // Prepare and bind
+        // Prepare and execute SQL statement
         $stmt = $conn->prepare("INSERT INTO contractors (first_name, last_name, company, service, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :company, :service, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);

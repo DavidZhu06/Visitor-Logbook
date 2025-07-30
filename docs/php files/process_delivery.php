@@ -29,11 +29,6 @@ try {
         $recipient = filter_input(INPUT_POST, 'recipient', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['recipient']), ENT_QUOTES, 'UTF-8') : '';
         $sign_in_time = date('Y-m-d H:i:s');
 
-        // Validate required fields
-        if (empty($first_name) || empty($last_name) || empty($company) || empty($recipient)) {
-            throw new Exception("All required fields must be filled.");
-        }
-
         // Determine the company name to store
         $company_name = $company;
         if ($company === "Other") {
@@ -57,7 +52,6 @@ try {
         // Save the inserted ID and type to session
         $_SESSION['guest_id'] = $conn->lastInsertId();
         $_SESSION['sign_in_type'] = 'guest';
-
 
 
         // Store sign_in_time in session for use in signature filename

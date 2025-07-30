@@ -19,17 +19,21 @@ try {
 
     $firstName = $_POST['first-name'] ?? '';
     $lastName = $_POST['last-name'] ?? '';
+    $passnumber = trim($_POST['passnumber'] ?? '');
 
-    if (empty($firstName) || empty($lastName)) {
-        throw new Exception("First name and last name are required.");
+    if ((empty($firstName) || empty($lastName)) && empty($passnumber)) {
+        throw new Exception("Please either enter First name and Last name OR your assigned Visitor Pass Number.");
     }
 
     // Tables to search
     $tables = ['contractors', 'deliveries', 'guests', 'interviews'];
+    $tablesWithPass = ['contractors', 'guests', 'interviews']; // Tables that use passnumber
 
     $found = false;
 
     foreach ($tables as $table) {
+        if (!empty($firstName) && !empty($lastName)) {
+        // Search by name
         $stmt = $pdo->prepare("
             SELECT id FROM $table 
             WHERE first_name = :first_name 
@@ -42,6 +46,19 @@ try {
             ':first_name' => $firstName,
             ':last_name' => $lastName
         ]);
+        } elseif (in_array($table,$tablesWithPass)) {
+            // Search by visitor pass
+            $stmt = $pdo->prepare("
+            SELECT id FROM $table 
+            WHERE passnumber = :passnumber 
+              AND sign_out_time IS NULL
+              ORDER BY sign_in_time DESC
+              LIMIT 1
+            ");
+        $stmt->execute([
+            ':passnumber' => $passnumber
+        ]);   
+    }
 
         $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
