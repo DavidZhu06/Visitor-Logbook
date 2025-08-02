@@ -32,7 +32,7 @@ try {
         $sign_in_time = date('Y-m-d H:i:s');
 
 
-        /* Can also use the following if you prefer not to use filter_input:
+        /*
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $company = $_POST['company'];

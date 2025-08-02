@@ -1,13 +1,14 @@
 <?php
 
-session_start(); // <-- Needed to use $_SESSION
+session_start(); // <-- Needed in order to store data in $_SESSION 
+/*PHP sessions allow for storing user information to be used across multiple pages of a web application. Sesson variables (specific pieces of data stored in a session for a single user) hold information about one single user, and are available to all pages in the same application, and by default last until the user closes the browser (in which they are auto cleared). Each user gets their own session so data is isolated and not shared with users. */
 
-// Load configuration
-$config = require __DIR__ . '/../config.php';
+// Load config file (database credentials)
+$config = require __DIR__ . '/../config.php'; // __DIR__ returns the absolute path of the directory where the current php script file resides
 
-$env = 'production'; // Change this to 'production' when deploying
+$env = 'production'; // Sets variable which indicates the environment that you are currently running the code in. Change this to 'production' when deploying
 
-$dbConfig = $config[$env]; // Get the correct config
+$dbConfig = $config[$env]; // Get the correct config - selects which database credentials to use based on the environment (production or staging)
 
 // Database connection
 $host = $dbConfig['host'];
