@@ -1,3 +1,8 @@
 # Ignore database and mail credentials
 config.php
 mail_config.php
+
+
+*.rdp
+/vendor/
+
