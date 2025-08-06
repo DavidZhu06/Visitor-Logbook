@@ -57,7 +57,7 @@ try {
         $service_provided = $service;
         if ($service === "Other") {
             if (empty($custom_service)) {
-                throw new Exception("Please enter a company name for 'Other'.");
+                throw new Exception("Please enter a custom service for 'Other'.");
             }
             $service_provided = $custom_service;
         }
@@ -66,8 +66,8 @@ try {
         $stmt = $conn->prepare("INSERT INTO contractors (first_name, last_name, company, service, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :company, :service, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':company', $company);
-        $stmt->bindParam(':service', $service);
+        $stmt->bindParam(':company', $company_name);
+        $stmt->bindParam(':service', $service_provided);
         $stmt->bindParam(':email_contact', $email_contact);
         $stmt->bindParam(':passnumber', $passnumber);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
@@ -83,21 +83,11 @@ try {
         // Store sign_in_time in session for use in signature filename
         $_SESSION['sign_in_time'] = $sign_in_time;
 
-        /*
-        // Send email to the entered email address
-        require_once 'send-mail.php';
-        $recipientName = trim($first_name . ' ' . $last_name);
-        // Attempt to send email, but don't interrupt flow on failure
-        if (!sendEmail($email_contact, $recipientName, $first_name)) {
-            error_log("Failed to send email to $email_contact at " . date('Y-m-d H:i:s'));
-        }
-        */
-
         // Store for later email
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
-        $_SESSION['company'] = $company;
-        $_SESSION['service'] = $service;
+        $_SESSION['company'] = $company_name;
+        $_SESSION['service'] = $service_provided;
         $_SESSION['email_contact'] = $email_contact;
         $_SESSION['passnumber'] = $passnumber;
         unset($_SESSION['signature_path']); // Clear any previous signature path
