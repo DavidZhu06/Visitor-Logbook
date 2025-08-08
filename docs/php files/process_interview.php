@@ -21,25 +21,14 @@ try {
 
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
         date_default_timezone_set('America/Vancouver');
-        // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
-        $IDCIContact = filter_input(INPUT_POST, 'IDCI_Contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['IDCI_Contact']), ENT_QUOTES, 'UTF-8') : '';
-        $email_contact = filter_input(INPUT_POST, 'email_contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['email_contact']), ENT_QUOTES, 'UTF-8') : '';
-        $passnumber = filter_input(INPUT_POST, 'passnumber', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['passnumber']), ENT_QUOTES, 'UTF-8') : '';
+        $first_name = htmlspecialchars(trim($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $last_name = htmlspecialchars(trim($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $IDCIContact = htmlspecialchars(trim($_POST['IDCI_Contact'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $email_contact = htmlspecialchars(trim($_POST['email_contact'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $passnumber = htmlspecialchars(trim($_POST['passnumber'] ?? ''), ENT_QUOTES, 'UTF-8');
         $sign_in_time = date('Y-m-d H:i:s');
-        
-        /* Can also use the following if you prefer not to use filter_input:
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $IDCIContact = $_POST['IDCI_Contact'];
-        $email_contact = $_POST['email_contact'];
-        $passnumber = $_POST['passnumber'];
-        $sign_in_time = date('Y-m-d H:i:s');
-        */
-    
+
         // Prepare and bind
         $stmt = $conn->prepare("INSERT INTO interviews (first_name, last_name, IDCI_Contact, email_contact, passnumber, sign_in_time) VALUES (:first_name, :last_name, :IDCI_Contact, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
@@ -54,25 +43,13 @@ try {
         $stmt->execute();
 
         // Save the inserted ID and type to session
-        $_SESSION['guest_id'] = $conn->lastInsertId();
-        $_SESSION['sign_in_type'] = 'interview';
+        $_SESSION['guest_id'] = $conn->lastInsertId(); //This saves the newly inserted contractor ID into the PHP session under the ky 'guest_id'
+        $_SESSION['sign_in_type'] = 'interview'; //Stores string 'contractor' in the session under the key 'sign_in_type' to indicate the type of user signed in
 
         
 
         // Store sign_in_time in session for use in signature filename
         $_SESSION['sign_in_time'] = $sign_in_time;
-
-
-        /*
-        // Send email to the entered email address
-        require_once 'send-mail.php';
-        $recipientName = trim($first_name . ' ' . $last_name);
-        // Attempt to send email, but don't interrupt flow on failure
-        if (!sendEmail($email_contact, $recipientName, $first_name)) {
-            error_log("Failed to send email to $email_contact at " . date('Y-m-d H:i:s'));
-        }
-        */
-
 
         // Store for later email
         $_SESSION['first_name'] = $first_name;
@@ -82,10 +59,10 @@ try {
         $_SESSION['contact'] = $IDCIContact;
 
 
-        unset($_SESSION['company']);  // Interviews don't use this
-        unset($_SESSION['service']);  // Interviews don't use this
-        unset($_SESSION['signature_path']); // Clear any previous signature path
+        unset($_SESSION['company']);  // Interviews don't use this, keeps session data clean and relevant for user flow
+        unset($_SESSION['service']);  
 
+        unset($_SESSION['signature_path']); // Clear any previous signature path by clearing the old value from the current session since the PDF email signature was showing a previous signature 
 
         // Redirect to PolicyInfo.html on success
         header("Location: ../html files/PolicyInfo.html");

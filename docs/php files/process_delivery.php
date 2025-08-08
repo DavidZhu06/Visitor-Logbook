@@ -22,11 +22,12 @@ try {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
-        $company = filter_input(INPUT_POST, 'company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['company']), ENT_QUOTES, 'UTF-8') : '';
-        $custom_company = filter_input(INPUT_POST, 'custom_company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['custom_company']), ENT_QUOTES, 'UTF-8') : '';
-        $recipient = filter_input(INPUT_POST, 'recipient', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['recipient']), ENT_QUOTES, 'UTF-8') : '';
+        date_default_timezone_set('America/Vancouver');
+        $first_name = htmlspecialchars(trim($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $last_name = htmlspecialchars(trim($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $company = htmlspecialchars(trim($_POST['company'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $custom_company = htmlspecialchars(trim($_POST['custom_company'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $recipient = htmlspecialchars(trim($_POST['recipient'] ?? ''), ENT_QUOTES, 'UTF-8');
         $sign_in_time = date('Y-m-d H:i:s');
 
         // Determine the company name to store
@@ -49,12 +50,10 @@ try {
 
         $stmt->execute();
 
-        // Save the inserted ID and type to session
-        $_SESSION['guest_id'] = $conn->lastInsertId();
-        $_SESSION['sign_in_type'] = 'guest';
+        $_SESSION['guest_id'] = $conn->lastInsertId(); //This saves the newly inserted Delivery ID into the PHP session under the ky 'guest_id'
+        $_SESSION['sign_in_type'] = 'delivery'; //Stores string 'delivery' in the session under the key 'sign_in_type' to indicate the type of user signed in
 
-
-        // Store sign_in_time in session for use in signature filename
+        // Store sign_in_time in session for use in signature filename - techinically not needed for deliveries
         $_SESSION['sign_in_time'] = $sign_in_time;
 
         // Redirect to confirmation page

@@ -24,17 +24,18 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         date_default_timezone_set('America/Vancouver');
         // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
-        $company = filter_input(INPUT_POST, 'company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['company']), ENT_QUOTES, 'UTF-8') : '';
-        $custom_company = filter_input(INPUT_POST, 'custom_company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['custom_company']), ENT_QUOTES, 'UTF-8') : '';
-        $email_contact = filter_input(INPUT_POST, 'contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['contact']), ENT_QUOTES, 'UTF-8') : '';
-        $service = filter_input(INPUT_POST, 'service', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['service']), ENT_QUOTES, 'UTF-8') : '';
-        $custom_service = filter_input(INPUT_POST, 'custom_service', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['custom_service']), ENT_QUOTES, 'UTF-8') : '';
-        $passnumber = filter_input(INPUT_POST, 'passnumber', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['passnumber']), ENT_QUOTES, 'UTF-8') : '';
+        // Use htmlspecialchars to prevent Cross-Site Scripting attacks (basically making sure that the user input isn't interpreted as JavaScript or HTML) and trim to remove whitespace
+        $first_name = htmlspecialchars(trim($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $last_name = htmlspecialchars(trim($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $company = htmlspecialchars(trim($_POST['company'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $custom_company = htmlspecialchars(trim($_POST['custom_company'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $email_contact = htmlspecialchars(trim($_POST['contact'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $service = htmlspecialchars(trim($_POST['service'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $custom_service = htmlspecialchars(trim($_POST['custom_service'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $passnumber = htmlspecialchars(trim($_POST['passnumber'] ?? ''), ENT_QUOTES, 'UTF-8');
         $sign_in_time = date('Y-m-d H:i:s');
 
-        /* Can also use the following if you prefer not to use filter_input:
+        /* Can also use the following (not as safe):
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $company = $_POST['company'];
@@ -75,30 +76,29 @@ try {
         // Execute the statement
         $stmt->execute();
 
-        $_SESSION['guest_id'] = $conn->lastInsertId();
-        $_SESSION['sign_in_type'] = 'contractor';
-
-
+        $_SESSION['guest_id'] = $conn->lastInsertId(); //lastInsertId() is a PDO method that returns the ID of the most recent row you inserted into the database on this connection. Bascially after contractor signs in, this script will insert contractor's info into the contractors table, mySQL will generate a unique ID for this row, and this line will store that ID in the PHP session under the key 'guest_id' so that it can be used later to update the signature data in process_policy.php
+        $_SESSION['sign_in_type'] = 'contractor'; //Stores string 'contractor' in the session under the key 'sign_in_type' to indicate the type of user signed in
         
         // Store sign_in_time in session for use in signature filename
         $_SESSION['sign_in_time'] = $sign_in_time;
 
-        // Store for later email
+        // Store for email 
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
+        $_SESSION['email'] = $email_contact; 
         $_SESSION['company'] = $company_name;
         $_SESSION['service'] = $service_provided;
         $_SESSION['email_contact'] = $email_contact;
         $_SESSION['passnumber'] = $passnumber;
-        unset($_SESSION['signature_path']); // Clear any previous signature path
+        unset($_SESSION['signature_path']); // Clear any previous signature path by clearing the old value from the current session since the PDF email signature was showing a previous signature 
 
         // Redirect to PolicyInfo.html on success
         header("Location: ../html%20files/PolicyInfo.html");
         exit();
     } 
-} catch (PDOException $e) {
+} catch (PDOException $e) { // Catch any database connection or query errors
     echo "Error: " . $e->getMessage();
-} catch (Exception $e) {
+} catch (Exception $e) { // Catch any other exceptions that aren't database related
     echo "Error: " . $e->getMessage();
 }
 ?>

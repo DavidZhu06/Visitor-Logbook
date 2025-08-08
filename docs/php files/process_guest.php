@@ -2,7 +2,7 @@
 
 session_start(); // <-- Needed to use $_SESSION
 
-// Load configuration
+// Load config file (database credentials)
 $config = require __DIR__ . '/../config.php';
 
 $env = 'production'; // Change this to 'production' when deploying
@@ -22,15 +22,13 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         date_default_timezone_set('America/Vancouver');
-        // Get and sanitize form data (filter_sanitize_string is deprecated as of PHP 8.1)
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['first_name']), ENT_QUOTES, 'UTF-8') : '';
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['last_name']), ENT_QUOTES, 'UTF-8') : '';
-        $company = filter_input(INPUT_POST, 'company', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['company']), ENT_QUOTES, 'UTF-8') : '';
-        $reason = filter_input(INPUT_POST, 'reason', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['reason']), ENT_QUOTES, 'UTF-8') : '';
-        $email_contact = filter_input(INPUT_POST, 'email_contact', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['email_contact']), ENT_QUOTES, 'UTF-8') : '';
-        $passnumber = filter_input(INPUT_POST, 'passnumber', FILTER_DEFAULT) ? htmlspecialchars(trim($_POST['passnumber']), ENT_QUOTES, 'UTF-8') : '';
-        $sign_in_time = date('Y-m-d H:i:s');
-
+        $first_name = htmlspecialchars(trim($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $last_name = htmlspecialchars(trim($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $company = htmlspecialchars(trim($_POST['company'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $reason = htmlspecialchars(trim($_POST['reason'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $email_contact = htmlspecialchars(trim($_POST['email_contact'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $passnumber = htmlspecialchars(trim($_POST['passnumber'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $sign_in_time = date('Y-m-d H:i:s'); 
 
         /*
         $first_name = $_POST['first_name'];
@@ -54,38 +52,23 @@ try {
 
         $stmt->execute();
 
-        // Save the inserted ID and type to session
-        $_SESSION['guest_id'] = $conn->lastInsertId();
-        $_SESSION['sign_in_type'] = 'guest';
+        $_SESSION['guest_id'] = $conn->lastInsertId(); //This saves the newly inserted guest ID into the PHP session under the ky 'guest_id'
+        $_SESSION['sign_in_type'] = 'guest'; //Stores string 'guestr' in the session under the key 'sign_in_type' to indicate the type of user signed in
 
         // Store sign_in_time in session for use in signature filename
         $_SESSION['sign_in_time'] = $sign_in_time;
 
-
-        /*
-        // Send email to the entered email address
-        require_once 'send-mail.php';
-        $recipientName = trim($first_name . ' ' . $last_name);
-        // Attempt to send email, but don't interrupt flow on failure
-        if (!sendEmail($email_contact, $recipientName, $first_name)) {
-            error_log("Failed to send email to $email_contact at " . date('Y-m-d H:i:s'));
-        }
-        */
-
         // Store for later email
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
+        $_SESSION['email'] = $email_contact; 
         $_SESSION['company'] = $company;
         $_SESSION['service'] = $reason;
         $_SESSION['email_contact'] = $email_contact;
         $_SESSION['passnumber'] = $passnumber;
-        unset($_SESSION['signature_path']); // Clear any previous signature path
-
-
-        unset($_SESSION['IDCI_Contact']);
-
-
-        unset($_SESSION['contact']); // Prevent it from leaking into send-mail
+        unset($_SESSION['signature_path']); 
+        unset($_SESSION['IDCI_Contact']); //Prevent data from Interview Form from leaking into Guest send-mail because sometimes previous interview data was showing up in the email sent to the guest
+        unset($_SESSION['contact']); // Prevent data from Contractor Form from leaking into Guest send-mail because same as above
 
 
         // Redirect to PolicyInfo.html on success

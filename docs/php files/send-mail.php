@@ -7,7 +7,7 @@ require 'Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function sendEmail($recipientEmail, $recipientName, $formData) {
+function sendEmail($recipientEmail, $recipientName, $formData) { //Parameters are the recipient's email, recipient's name, and form data
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -30,7 +30,7 @@ try {
     $mail->addAddress($recipientEmail, $recipientName); // Recipient's email and name
 
 
-    $visitDate = date('l, F j, Y \a\t g:i A', strtotime($formData['sign_in_time']));
+    $visitDate = date('l, F j, Y \a\t g:i A', strtotime($formData['sign_in_time'])); //set visit date format to "Monday, January 1, 2024 at 12:00 PM"
 
 
     // CONTENT
@@ -48,7 +48,7 @@ try {
     Imperial Distributors Canada Inc.';
 
 
-    // 🧾 Generate PDF using mPDF (ChatGPT)
+    // Generate PDF using mPDF (lowkey a llm generated this part but it works so I’m keeping it)
     $mpdf = new \Mpdf\Mpdf();
 
     $signaturePath = $_SESSION['signature_path'] ?? null;
@@ -64,6 +64,7 @@ try {
     $html = "
         <h2 style=\"text-align: center;\">{$recipientName} Sign-In Log</h2>
         <p><strong>Name:</strong> {$formData['first_name']} {$formData['last_name']}</p>
+        <p><strong>Email:</strong> {$formData['email_contact']}</p>
         <p><strong>Company:</strong> {$formData['company']}</p>
         <p><strong>Reason/Service:</strong> {$formData['service']}</p>
         <p><strong>Pass Number:</strong> {$formData['passnumber']}</p>
@@ -98,7 +99,7 @@ try {
     $mpdf->Output($pdfPath, \Mpdf\Output\Destination::FILE); 
     
 
-    // 📎 Attach PDF to email
+    // Attach PDF to email
     $mail->addAttachment($pdfPath, 'SignInRecord.pdf');
 
     // SEND
@@ -106,7 +107,7 @@ try {
     error_log("Email has been sent to {$recipientEmail}");
 
 
-    // Deletes PDF - for david to note
+    // Deletes PDF - if we wanna save space
     /*
     if (file_exists($pdfPath)) {
         unlink($pdfPath);
