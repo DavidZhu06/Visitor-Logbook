@@ -61,15 +61,16 @@ try {
             $signatureImageTag = '<p><strong>SIGNATURE:</strong> (Not Available)</p>';
     }
 
+    //(!empty($formData['IDCI_Contact']) ? htmlspecialchars($formData['IDCI_Contact']) : 'N/A') This basically says that if IDCI_Contact is set, then ouput the value but pass it through htmlspecial chars. If it is not set, then output N/A.
     $html = "
         <h2 style=\"text-align: center;\">{$recipientName} Sign-In Log</h2>
         <p><strong>Name:</strong> {$formData['first_name']} {$formData['last_name']}</p>
         <p><strong>Email:</strong> {$formData['email_contact']}</p>
         <p><strong>Company:</strong> {$formData['company']}</p>
-        <p><strong>Reason/Service:</strong> {$formData['service']}</p>
+        <p><strong>Service:</strong> {$formData['service']}</p>
         <p><strong>Pass Number:</strong> {$formData['passnumber']}</p>
         <p><strong>Imperial Distributors Canada Inc. Contact:</strong> " . (!empty($formData['IDCI_Contact']) ? htmlspecialchars($formData['IDCI_Contact']) : 'N/A') . "</p>
-        <p><strong>Sign-In Time:</strong> {$formData['sign_in_time']}</p>
+        <p><strong>Sign-In Time:</strong> {$formData['sign_in_time']}</p> 
         <p>___________________________________________________</p>
         <p><strong>NON-DISCLOSURE POLICY:</strong> <br>I understand that during my time at Imperial Distributors Canada Inc. (IDCI), I may access confidential or proprietary information. I agree not to disclose any such information, including personal, private, operational, or trade secrets, to anyone during or after my relationship with the Company, unless authorized or legally required.
         I will not remove, copy, photograph, or otherwise record any documents or information, in any form, without written permission from IDCI. <strong>I will not photograph or otherwise record any information which I may have access to during my visit.</strong>

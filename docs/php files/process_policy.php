@@ -73,12 +73,11 @@ try {
                 'last_name' => $_SESSION['last_name'] ?? '',
                 'email_contact' => $_SESSION['email'] ?? '',
                 'company' => ($sign_in_type === 'interview') ? 'N/A' : ($_SESSION['company'] ?? ''), // If the sign-in type is interview, company is set to N/A
-                'service' => ($sign_in_type === 'interview') ? 'N/A' : ($_SESSION['service'] ?? ''), // if the sign in type is interview, service is set to N/A
+                'service' => ($sign_in_type === 'interview' || $sign_in_type === 'guest') ? 'N/A' : ($_SESSION['service'] ?? ''), // if the sign in type is interview, service is set to N/A
                 //'email_contact' => $_SESSION['contact'] ?? '', //not used rn, might be used in future
                 'passnumber' => $_SESSION['passnumber'] ?? '',
                 'sign_in_time' => $_SESSION['sign_in_time'] ?? '',
-                'IDCI_Contact' => ($_SESSION['sign_in_type'] === 'interview') ? ($_SESSION['contact'] ?? '') : '', //if the sign in type is interview, contact is assigned to IDCI_Contact, otherwise it will just be empty
-
+                'IDCI_Contact' => ($_SESSION['sign_in_type'] === 'interview') ? ($_SESSION['contact'] ?? '') : (($_SESSION['sign_in_type'] === 'guest') ? ($_SESSION['IDCI_Contact'] ?? '') : ''),
             ];
 
             $recipientEmail = $_SESSION['email_contact'] ?? ''; // Get the email address from the session

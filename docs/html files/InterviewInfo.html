@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Interview Sign-In</title>
   <link rel="stylesheet" href="./../css files/InterviewInfo.css" />
+    <style>
+    /* Simple styling for the autocomplete list */
+    .autocomplete-list {
+      position: absolute;
+      border: 1px solid #ccc;
+      border-top: none;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: white;
+      z-index: 1000;
+      width: calc(100% - 2px);
+    }
+    .autocomplete-item {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .autocomplete-item:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
   <div class="flow-container">
@@ -31,9 +51,10 @@
       </div>
 
       <!--The IDCI Contact/Interviewer stage is meant to be integrated with the Active Directory-->
-      <div class="form-group full-width">
+      <div class="form-group full-width" style="position: relative;">
         <label for="IDCIContact">IDCI Contact/Interviewer</label>
-        <input type="text" id="IDCIContact" name="IDCI_Contact" required />
+        <input type="text" id="IDCIContact" name="IDCI_Contact" autocomplete="off" required />
+        <div id="autocomplete-list" class="autocomplete-list" style="display:none;"></div>
       </div>
       
 
@@ -45,5 +66,70 @@
       <button type="submit" class="flow-button">Submit</button>
     </form>
   </div>
+
+  <script>
+    const input = document.getElementById('IDCIContact');
+    const listContainer = document.getElementById('autocomplete-list');
+    let names = [];
+
+    // Fetch the LDAP_Users.txt file
+    async function fetchNames() {
+      try {
+        const response = await fetch('./LDAP_Users.txt?cacheBust=' + Date.now());
+        if (!response.ok) throw new Error('Network response was not ok');
+        const text = await response.text();
+        names = text.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+      } catch (err) {
+        console.error('Error fetching LDAP_Users.txt:', err);
+      }
+    }
+
+    // Show suggestions based on input
+    function showSuggestions(value) {
+      listContainer.innerHTML = '';
+      if (!value) {
+        listContainer.style.display = 'none';
+        return;
+      }
+      const matches = names.filter(name =>
+        name.toLowerCase().includes(value.toLowerCase())
+      ).slice(0, 10);
+
+      if (matches.length === 0) {
+        listContainer.style.display = 'none';
+        return;
+      }
+
+      matches.forEach(match => {
+        const item = document.createElement('div');
+        item.textContent = match;
+        item.classList.add('autocomplete-item');
+        item.addEventListener('click', () => {
+          input.value = match;
+          listContainer.style.display = 'none';
+        });
+        listContainer.appendChild(item);
+      });
+
+      listContainer.style.display = 'block';
+    }
+
+    // Event listeners
+    input.addEventListener('input', () => {
+      showSuggestions(input.value);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!listContainer.contains(e.target) && e.target !== input) {
+        listContainer.style.display = 'none';
+      }
+    });
+
+    // Load names on page load
+    fetchNames();
+    // Refresh names every 30 seconds in case the text file updates
+    setInterval(fetchNames, 30000);
+  </script>
+
 </body>
 </html>

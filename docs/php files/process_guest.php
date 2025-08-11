@@ -2,6 +2,10 @@
 
 session_start(); // <-- Needed to use $_SESSION
 
+// Clear any old data from other sign-in types 
+ //Prevent data from Interview Form from leaking into Guest send-mail because sometimes previous interview data was showing up in the email sent to the guest
+unset($_SESSION['contact'], $_SESSION['company'], $_SESSION['IDCI_Contact'], $_SESSION['email_contact'], $_SESSION['passnumber'], $_SESSION['signature_path']);
+
 // Load config file (database credentials)
 $config = require __DIR__ . '/../config.php';
 
@@ -25,7 +29,7 @@ try {
         $first_name = htmlspecialchars(trim($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8');
         $last_name = htmlspecialchars(trim($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8');
         $company = htmlspecialchars(trim($_POST['company'] ?? ''), ENT_QUOTES, 'UTF-8');
-        $reason = htmlspecialchars(trim($_POST['reason'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $IDCI_Contact = htmlspecialchars(trim($_POST['IDCI_Contact'] ?? ''), ENT_QUOTES, 'UTF-8');
         $email_contact = htmlspecialchars(trim($_POST['email_contact'] ?? ''), ENT_QUOTES, 'UTF-8');
         $passnumber = htmlspecialchars(trim($_POST['passnumber'] ?? ''), ENT_QUOTES, 'UTF-8');
         $sign_in_time = date('Y-m-d H:i:s'); 
@@ -40,12 +44,12 @@ try {
         $sign_in_time = date('Y-m-d H:i:s');
         */
 
-        $stmt = $conn->prepare("INSERT INTO guests (first_name, last_name, company, reason, email_contact, passnumber, sign_in_time) 
-                                VALUES (:first_name, :last_name, :company, :reason, :email_contact, :passnumber, :sign_in_time)");
+        $stmt = $conn->prepare("INSERT INTO guests (first_name, last_name, company, IDCI_Contact, email_contact, passnumber, sign_in_time) 
+                                VALUES (:first_name, :last_name, :company, :IDCI_Contact, :email_contact, :passnumber, :sign_in_time)");
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':company', $company);
-        $stmt->bindParam(':reason', $reason);
+        $stmt->bindParam(':IDCI_Contact', $IDCI_Contact);
         $stmt->bindParam(':email_contact', $email_contact);
         $stmt->bindParam(':passnumber', $passnumber);
         $stmt->bindParam(':sign_in_time', $sign_in_time);
@@ -63,13 +67,9 @@ try {
         $_SESSION['last_name'] = $last_name;
         $_SESSION['email'] = $email_contact; 
         $_SESSION['company'] = $company;
-        $_SESSION['service'] = $reason;
+        $_SESSION['IDCI_Contact'] = $IDCI_Contact;
         $_SESSION['email_contact'] = $email_contact;
         $_SESSION['passnumber'] = $passnumber;
-        unset($_SESSION['signature_path']); 
-        unset($_SESSION['IDCI_Contact']); //Prevent data from Interview Form from leaking into Guest send-mail because sometimes previous interview data was showing up in the email sent to the guest
-        unset($_SESSION['contact']); // Prevent data from Contractor Form from leaking into Guest send-mail because same as above
-
 
         // Redirect to PolicyInfo.html on success
         header("Location: ../html files/PolicyInfo.html");

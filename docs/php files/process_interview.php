@@ -2,6 +2,10 @@
 
 session_start(); // <-- Needed to use $_SESSION
 
+unset($_SESSION['company']);  // Interviews don't use this, keeps session data clean and relevant for user flow
+unset($_SESSION['service']);  
+unset($_SESSION['signature_path']); // Clear any previous signature path by clearing the old value from the current session since the PDF email signature was showing a previous signature 
+
 // Load configuration
 $config = require __DIR__ . '/../config.php';
 
@@ -57,12 +61,6 @@ try {
         $_SESSION['email_contact'] = $email_contact;
         $_SESSION['passnumber'] = $passnumber;
         $_SESSION['contact'] = $IDCIContact;
-
-
-        unset($_SESSION['company']);  // Interviews don't use this, keeps session data clean and relevant for user flow
-        unset($_SESSION['service']);  
-
-        unset($_SESSION['signature_path']); // Clear any previous signature path by clearing the old value from the current session since the PDF email signature was showing a previous signature 
 
         // Redirect to PolicyInfo.html on success
         header("Location: ../html files/PolicyInfo.html");
