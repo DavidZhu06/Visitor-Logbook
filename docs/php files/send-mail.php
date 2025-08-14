@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 
 function sendEmail($recipientEmail, $recipientName, $formData) { //Parameters are the recipient's email, recipient's name, and form data
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php'; // Load mPDF via Composer autoload (don't need to manually include mPDF files)
 
 $mailConfig = require __DIR__ . '/../mail_config.php';
     

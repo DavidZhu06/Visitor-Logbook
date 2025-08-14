@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php'; 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Spreadsheet; //for shorter, cleaner class names
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -68,7 +68,7 @@ try {
     $tables = ['contractors', 'deliveries', 'guests', 'interviews'];
 
     // Create Spreadsheet
-    $spreadsheet = new Spreadsheet();
+    $spreadsheet = new Spreadsheet(); //without the use lines at the top, you would need to use full class name - $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $spreadsheet->removeSheetByIndex(0); // Remove default sheet
 
     foreach ($tables as $index => $table) {
