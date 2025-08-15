@@ -94,7 +94,7 @@ try {
     echo "Export successful: $filename";
 
     // Call the function after export
-    sendEmail($today, $filepath);
+    // sendEmail($today, $filepath);
 
 } catch (PDOException $e) {
     echo "Database Error: " . $e->getMessage();
