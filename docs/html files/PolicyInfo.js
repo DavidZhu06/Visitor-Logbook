@@ -101,15 +101,33 @@ document.getElementById('clearBtn').addEventListener('click', () => {
 });
 
 // Update signature input before form submission
-document.getElementById('submitBtn').addEventListener('click', () => {
-  if (signatureData.length > 0) {
-    const signature = canvas.toDataURL('image/png');
-    document.getElementById('signature').value = signature;
-  } else {
-    alert('Please provide a signature before submitting.');
-  }
-});
+const form = document.getElementById('signatureForm');
+const submitBtn = document.getElementById('submitBtn');
 
+form.addEventListener('submit', (e) => {
+  // If no signature, stop submission
+  if (signatureData.length === 0) {
+    e.preventDefault();
+    alert('Please provide a signature before submitting.');
+    return;
+  }
+
+  // Save signature to hidden input
+  const signature = canvas.toDataURL('image/png');
+  document.getElementById('signature').value = signature;
+
+  // Disable button + change text
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Next...";
+  submitBtn.style.backgroundColor = "#999"; // greyed out
+
+  // Optional fallback: re-enable after 5s if needed
+  setTimeout(() => {
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Next";
+    submitBtn.style.backgroundColor = ""; // reset style
+  }, 5000);
+});
 
 // Resize canvas on load and window resize
 window.addEventListener('resize', resizeCanvas);
