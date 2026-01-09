@@ -31,7 +31,7 @@ MySQL Server 8.0.41 or higher
   - You must also have a properly configured MySQL database with the required tables already created exactly like that in the PHP files (otherwise it will fail to post the data) , as well as a valid email account set up for sending emails.
 
 **Installation**  
-(Primary documentation file for maintenance - specific to the project setting): [View Documentation PDF](C:\Users\david\OneDrive\Documents\IDCI_Internship)
+(Primary documentation file for maintenance - specific to the project setting): [View Documentation PDF](./docs/Documentation&Maintenance.pdf)
 (This is less of a technical document and more of a information dump serving primarily to deepen my own understanding of server management): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
 
 **CONTACT**:  
