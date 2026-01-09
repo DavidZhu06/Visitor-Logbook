@@ -32,6 +32,7 @@ MySQL Server 8.0.41 or higher
 
 **Installation**  
 (Primary documentation file for maintenance - specific to the project setting): [View Documentation PDF](./docs/Documentation&Maintenance.pdf)
+
 (This is less of a technical document and more of a information dump serving primarily to deepen my own understanding of server management): [View Installation PDF](./docs/VisitorKioskInstallation.pdf)
 
 **CONTACT**:  
